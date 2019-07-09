@@ -1,0 +1,93 @@
+<!-- <div class="grid-layout-container container">
+  <div class="sixteen columns">
+
+      <div class="larger-image-container ten columns alpha"
+      style="background-image:url({{ section.settings.larger-image-left | img_url: '2000x2000' }})">
+
+      </div>
+
+      <div class="smaller-image-container six columns omega"
+      style="background-image:url({{ section.settings.smaller-image-right | img_url: '800x800' }})">
+      </div>
+        <div class="grid-text-content six columns omega">
+          <div class="grid-text-content-wrapper">
+          <div class="quote-marks">{{ 'quote.svg' | asset_url | img_tag }}</div>
+          <div class="border-line">
+            <p>{{ section.settings.grid-text-content }}</p>
+          </div>
+          </div>
+        </div>
+
+  </div>
+</div> -->
+
+<div class="grid-layout-container">
+  <div class="">
+    <div class="larger-image-half">
+      <div class="larger-image-container my-paroller wow fadeInLeft"
+      style="background-image:url({{ section.settings.larger-image-left | img_url: '2000x2000' }})" >
+
+      </div>
+    </div>
+
+      <div class="image-and-text-half">
+        <div class="smaller-image-container my-paroller wow fadeInRight"
+        style="background-image:url({{ section.settings.smaller-image-right | img_url: '800x800' }})" >
+        </div>
+        <div class="grid-text-content  wow fadeInRight" style="background-color:{{ section.settings.block-color-bg }}">
+
+            <div class="grid-text-content-wrapper">
+
+              <!-- <div class="quote-line-half">
+                <div class="quote-marks">{{ 'quote.svg' | asset_url | img_tag }}</div>
+                <div class="border-line"></div>
+              </div> -->
+
+              <div class="quote-content-half">
+                  <p>{{ section.settings.grid-text-content }}</p>
+              </div>
+            </div>
+
+        </div>
+      </div>
+
+  </div>
+</div>
+
+
+
+
+{% schema %}
+{
+  "name": "Grid layout Images",
+  "settings": [
+   {
+    "id": "larger-image-left",
+    "type": "image_picker",
+    "label": "Bigger image left"
+   },
+   {
+    "id": "smaller-image-right",
+    "type": "image_picker",
+    "label": "Smaller image right"
+  },
+  {
+    "type": "color",
+    "id": "block-color-bg",
+    "label": "Block color background",
+    "default": "#D48166"
+  },
+  {
+   "id": "grid-text-content",
+   "type": "textarea",
+   "label": "Text content"
+  }
+  ],
+  "presets": [
+    {
+      "name": "Grid layout Images",
+      "category": "Grid layout Images"
+    }
+  ]
+}
+{% endschema %}

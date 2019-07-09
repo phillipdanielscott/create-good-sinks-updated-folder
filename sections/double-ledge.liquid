@@ -1,0 +1,167 @@
+<div class="seamless-drain-container container">
+  <h1>{{ page.title }}</h1>
+
+  <p>{{ page.content }}</p>
+
+</div>
+
+<div class="seamless-info-container container full-width">
+{% for block in section.blocks %}
+    {% case block.type %}
+
+    {% when "image-and-text" %}
+
+    {% if block.settings.seam-image-placement == "left" %}
+
+      {%- if block.settings.image-item -%}
+        {%- assign image_item = block.settings.image-item | img_url: '1800x' -%}
+      {%- else -%}
+        {%- assign image_item = 'blank.svg' | asset_url -%}
+      {%- endif -%}
+
+        <div class="image-and-text-container-seam">
+          <div class="image-side-seam" style="background-image:url({{ image_item }}); background-position:center; background-repeat: no-repeat; background-size: cover;">
+
+          </div>
+          <div class="text-side-seam" style="background-color:{{ block.settings.background_color }};">
+            <div class="seamless-text-content">
+              <h4>{{ block.settings.seam-section-title }}</h4>
+              <div class="seamless-description">
+                {{ block.settings.seam-section-description }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        {% elsif block.settings.seam-image-placement == "right" %}
+
+        {%- if block.settings.image-item -%}
+          {%- assign image_item = block.settings.image-item | img_url: '1800x' -%}
+        {%- else -%}
+          {%- assign image_item = 'blank.svg' | asset_url -%}
+        {%- endif -%}
+
+          <div class="image-and-text-container-seam image-and-text-container-seam-right">
+            <div class="text-side-seam text-side-seam-left" style="background-color:{{ block.settings.background_color }};">
+              <div class="seamless-text-content">
+                <h4>{{ block.settings.seam-section-title }}</h4>
+                <div class="seamless-description">
+                  {{ block.settings.seam-section-description }}
+                </div>
+              </div>
+            </div>
+            <div class="image-side-seam image-side-right" style="background-image:url({{ image_item }}); background-position:center; background-repeat: no-repeat; background-size: cover;">
+
+            </div>
+          </div>
+
+        {% endif %}
+
+
+
+  {% endcase %}
+{% endfor %}
+</div>
+
+{% for block in section.blocks %}
+    {% case block.type %}
+
+    {% when "video-section" %}
+
+    <div class="video-section-container">
+      <div class="container full-width">
+          <div class="videoWrapper">
+              <iframe width="100%" height="349" src="{{ block.settings.video-url }}" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+          </div>
+      </div>
+    </div>
+
+    <style media="screen">
+      .mediaWrapper{
+            position: unset !important;
+      }
+    </style>
+
+
+    {% endcase %}
+  {% endfor %}
+<style>
+
+  .custom-template{
+    width: 100%;
+    padding-top: 0px !important;
+   }
+
+</style>
+
+
+
+{% schema %}
+{
+  "name": "Offset page content",
+  "settings": [
+
+  ],
+  "blocks": [
+  {
+    "type": "image-and-text",
+    "name": "Image with Text",
+    "settings": [
+    {
+     "type": "select",
+     "id": "seam-image-placement",
+     "options": [
+      { "value": "left", "label": "image left text left"},
+      { "value": "right", "label": "image right text left"}
+     ],
+     "label": "Image and text placement",
+     "default":   "left"
+    },
+    {
+      "type": "image_picker",
+      "id": "image-item",
+      "label": "Image and text"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#EBECE4"
+    },
+    {
+     "type": "text",
+     "id": "seam-section-title",
+     "default": "TITLE",
+     "label": "Section Title"
+   },
+   {
+     "type": "richtext",
+     "id": "seam-section-description",
+     "label": "section Description",
+     "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>"
+   }
+
+    ]
+  },
+  {
+    "type": "video-section",
+    "name": "Video section",
+    "settings": [
+    {
+     "id": "video-url",
+     "type": "text",
+     "label": "Video Url"
+    }
+    ]
+  }
+
+  ],
+  "presets": [
+    {
+      "name": "FAQ image slider",
+      "category": "images"
+    }
+  ]
+}
+{% endschema %}

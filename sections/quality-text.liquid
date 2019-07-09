@@ -1,0 +1,40 @@
+<div class="quality-homepage-section" style="background-color:{{ section.settings.background_color }};">
+  <div class="quality-text-container">
+     <h3>{{ section.settings.quality-home-text-title }}</h3>
+     <div class="quality-text-content">
+       {{ section.settings.quality-home-text-content }}
+     </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+"name": "Quality text box",
+	"settings": [
+  {
+   "type": "color",
+   "id": "background_color",
+   "label": "Section background color",
+   "default": "#ffffff"
+ },
+  {
+    "type": "text",
+    "id": "quality-home-text-title",
+    "label": "Section title"
+  },
+  {
+     "type": "richtext",
+     "id": "quality-home-text-content",
+     "label": "Section description",
+     "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>"
+  }
+  ],
+	"presets": [
+  {
+		"name": "Quality text box",
+		"category": "Text"
+	}
+  ]
+}
+{% endschema %}

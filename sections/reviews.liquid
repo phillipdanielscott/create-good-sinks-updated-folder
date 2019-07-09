@@ -1,0 +1,940 @@
+<div class="review-wrapper container">
+<h1>{{ page.title }}</h1>
+
+{% for block in section.blocks %}
+  {% case block.type %}
+    {% when 'image-carousel'%}
+
+
+
+        {%- if block.settings.image-slide-1 -%}
+          {%- assign image_slide_one = block.settings.image-slide-1| img_url: '1800x' -%}
+        {%- else -%}
+          {%- assign image_slide_one = 'blank.svg' | asset_url -%}
+        {%- endif -%}
+
+        {%- if block.settings.image-slide-2 -%}
+          {%- assign image_slide_two = block.settings.image-slide-2| img_url: '1800x' -%}
+        {%- else -%}
+          {%- assign image_slide_two = 'blank.svg' | asset_url -%}
+        {%- endif -%}
+
+        {%- if block.settings.image-slide-3 -%}
+          {%- assign image_slide_three = block.settings.image-slide-3| img_url: '1800x' -%}
+        {%- else -%}
+          {%- assign image_slide_three = 'blank.svg' | asset_url -%}
+        {%- endif -%}
+
+        {%- if block.settings.image-slide-4 -%}
+          {%- assign image_slide_four = block.settings.image-slide-4| img_url: '1800x' -%}
+        {%- else -%}
+          {%- assign image_slide_four = 'blank.svg' | asset_url -%}
+        {%- endif -%}
+
+        {%- if block.settings.image-slide-5 -%}
+          {%- assign image_slide_five = block.settings.image-slide-5| img_url: '1800x' -%}
+        {%- else -%}
+          {%- assign image_slide_five = 'blank.svg' | asset_url -%}
+        {%- endif -%}
+
+
+
+        <!-- <div class="review-carousel-wrapper">
+          <div class="owl-carousel owl-theme owl-loaded owl-drag review-image-slider"> -->
+          <div class="review-carousel-wrapper">
+            <div class="owl-carousel owl-theme">
+              <!-- <div class="item review-slide-1" style="background-image:url( {{ image_slide_one }});"></div>
+              <div class="item review-slide-2" style="background-image:url( {{ image_slide_two }});"></div>
+              <div class="item review-slide-3" style="background-image:url( {{ image_slide_three }});"></div>
+              <div class="item review-slide-4" style="background-image:url( {{ image_slide_four }});"></div>
+              <div class="item review-slide-5" style="background-image:url( {{ image_slide_five }});"></div> -->
+              <div class="featured-image-container" style="background-image:url({{ image_slide_one }}); background-position:center; background-repeat: no-repeat; background-size: cover; "></div>
+              <div class="featured-image-container" style="background-image:url({{ image_slide_two }}); background-position:center; background-repeat: no-repeat; background-size: cover; "></div>
+              <div class="featured-image-container" style="background-image:url({{ image_slide_three }}); background-position:center; background-repeat: no-repeat; background-size: cover; "></div>
+              <div class="featured-image-container" style="background-image:url({{ image_slide_four }}); background-position:center; background-repeat: no-repeat; background-size: cover; "></div>
+              <div class="featured-image-container" style="background-image:url({{ image_slide_five }}); background-position:center; background-repeat: no-repeat; background-size: cover; "></div>
+          </div>
+        </div>
+
+
+        <script type="text/javascript">
+        $(".owl-carousel").owlCarousel({
+          lazyLoad:true,
+          loop:true,
+          autoplay:true,
+          autoplayTimeout:8000,
+          autoplayHoverPause:true,
+          mouseDrag:true,
+          touchDrag:true,
+          singleItem: true,
+          items : 1,
+          pagination:false,
+          itemsDesktop : false,
+          itemsDesktopSmall : false,
+          itemsTablet: false,
+          nav:true,
+          navText:["<div class='nav-btn prev-slide'><i class='fas fa-angle-left review-angle-left'></i></div>",
+                  "<div class='nav-btn next-slide'><i class='fas fa-angle-right review-angle-right'></i></div>"],
+          dots: true
+        });
+        </script>
+
+    {% when 'media-reviews' %}
+
+        {%- if block.settings.review-icon-1 -%}
+          {%- assign review_icon_one = block.settings.review-icon-1| img_url: '1000x' -%}
+        {%- else -%}
+          {%- assign review_icon_one = 'blank.svg' | asset_url -%}
+        {%- endif -%}
+
+        {%- if block.settings.review-icon-2-%}
+          {%- assign review_icon_two = block.settings.review-icon-2| img_url: '1000x' -%}
+        {%- else -%}
+          {%- assign review_icon_two = 'blank.svg' | asset_url -%}
+        {%- endif -%}
+
+        {%- if block.settings.review-icon-3 -%}
+          {%- assign review_icon_three = block.settings.review-icon-3| img_url: '1000x' -%}
+        {%- else -%}
+          {%- assign review_icon_three = 'blank.svg' | asset_url -%}
+        {%- endif -%}
+
+        {%- if block.settings.review-icon-4 -%}
+          {%- assign review_icon_four = block.settings.review-icon-4| img_url: '1000x' -%}
+        {%- else -%}
+          {%- assign review_icon_four = 'blank.svg' | asset_url -%}
+        {%- endif -%}
+
+        {% if block.settings.border-line-media %}
+
+          <div class="border-line">
+          </div>
+
+        {% endif %}
+
+        <div class="media-review-container container">
+        <h3 class="wow fadeInUp">{{ block.settings.four-block-title }}</h3>
+          <div class="media-review-block one-half-cgc wow fadeInUp" data-wow-delay="0.2s">
+            <div class="media-review-wrapper" style="background-color:{{ block.settings.block-bg-color }}">
+              <div class="quote-icon-wrapper">
+                <img src="{{ 'quote-icon.svg' | asset_url }}" alt="">
+              </div>
+              <div class="media-review-text-content">
+                {{ block.settings.review-quote-1 }}
+              </div>
+              <div class="review-company-icon">
+                <span>AS SEEN ON</span>
+                <img src="{{ review_icon_one }}" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="media-review-block one-half-cgc wow fadeInUp" data-wow-delay="0.3s">
+            <div class="media-review-wrapper" style="background-color:{{ block.settings.block-bg-color }}">
+              <div class="quote-icon-wrapper">
+                <img src="{{ 'quote-icon.svg' | asset_url }}" alt="">
+              </div>
+              <div class="media-review-text-content">
+                {{ block.settings.review-quote-2 }}
+              </div>
+              <div class="review-company-icon">
+                <span>AS SEEN ON</span>
+                <img src="{{ review_icon_two }}" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="media-review-block one-half-cgc wow fadeInUp" data-wow-delay="0.4s">
+            <div class="media-review-wrapper" style="background-color:{{ block.settings.block-bg-color }}">
+              <div class="quote-icon-wrapper">
+                <img src="{{ 'quote-icon.svg' | asset_url }}" alt="">
+              </div>
+              <div class="media-review-text-content">
+                {{ block.settings.review-quote-3 }}
+              </div>
+              <div class="review-company-icon">
+                <span>AS SEEN ON</span>
+                <img src="{{ review_icon_three }}" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="media-review-block one-half-cgc wow fadeInUp" data-wow-delay="0.5s">
+            <div class="media-review-wrapper" style="background-color:{{ block.settings.block-bg-color }}">
+              <div class="quote-icon-wrapper">
+                <img src="{{ 'quote-icon.svg' | asset_url }}" alt="">
+              </div>
+              <div class="media-review-text-content">
+                {{ block.settings.review-quote-4 }}
+              </div>
+              <div class="review-company-icon">
+                <span>AS SEEN ON</span>
+                <img src="{{ review_icon_four }}" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+
+  {% when 'awards'%}
+
+  <div class="awards-content-wrapper">
+    <div class="">
+      <h3>{{ block.settings.awards-section-title }}</h3>
+      <div class="award-item-container container">
+        <div class="award-item wow fadeInUp" data-wow-delay="0.2s">
+          <table style="width:80px;"cellpadding="0" cellspacing="0"><tr><td><a href="https://www.houzz.com/pro/creategood/create-good-sinks-kitchen-sinks-and-accessories"><img src="https://st.hzcdn.com/static/badge_8_8@2x.png" alt="Dan Sullivan in Cincinnati, OH on Houzz" width="80" height="80" border="0" /></a></td></tr></table>
+        </div>
+
+        <div class="award-item wow fadeInUp" data-wow-delay="0.3s">
+          <table style="width:80px;"cellpadding="0" cellspacing="0"><tr><td><a href="https://www.houzz.com/pro/creategood/create-good-sinks-kitchen-sinks-and-accessories"><img src="https://st.hzcdn.com/static/badge_13_8@2x.png" alt="Dan Sullivan in Cincinnati, OH on Houzz" width="80" height="80" border="0" /></a></td></tr></table>
+        </div>
+
+        <div class="award-item wow fadeInUp" data-wow-delay="0.4s">
+          <table style="width:80px;"cellpadding="0" cellspacing="0"><tr><td><a href="https://www.houzz.com/pro/creategood/create-good-sinks-kitchen-sinks-and-accessories"><img src="https://st.hzcdn.com/static/badge_44_8@2x.png" alt="Dan Sullivan in Cincinnati, OH on Houzz" width="80" height="80" border="0" /></a></td></tr></table>
+        </div>
+
+        <div class="award-item wow fadeInUp" data-wow-delay="0.5s">
+          <table style="width:80px;"cellpadding="0" cellspacing="0"><tr><td><a href="https://www.houzz.com/pro/creategood/create-good-sinks-kitchen-sinks-and-accessories"><img src="https://st.hzcdn.com/static/badge_47_8@2x.png" alt="Dan Sullivan in Cincinnati, OH on Houzz" width="80" height="80" border="0" /></a></td></tr></table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  {% when 'review-widget'%}
+
+        {% if block.settings.border-line-review %}
+
+          <div class="border-line">
+          </div>
+
+        {% endif %}
+          <div class="leave-review-container container">
+            <h3 class="wow fadeInUp">{{ block.settings.leave-review-section-title }}</h3>
+            <!-- <div class="leave-review-content-wrapper">
+              <div class="review-tab">
+                <div class="review-tab-content" style="background-color:{{ block.settings.tab-bg-color }}; height:100%;">
+                  <img src="{{ block.settings.review-tab-icon-one | img_url: '500x' }}" alt="">
+                </div>
+              </div>
+              <div class="review-tab" >
+                <div class="review-tab-content" style="background-color:{{ block.settings.tab-bg-color }}; height:100%;">
+                  <img src="{{ block.settings.review-tab-icon-two | img_url: '500x' }}" alt="">
+                </div>
+              </div>
+            </div> -->
+            <div class="widget-wrapper wow fadeInUp" data-wow-delay="0.2s">
+              <a class="houzz-review-widget" data-pro="creategood" data-hzid="20577" data-locale="en-US" href="https://www.houzz.com">Houzz</a>
+            </div>
+
+            <script>
+            (function(d,s,id){if(!d.getElementById(id)){var js=d.createElement(s);js.id=id;js.async=true;js.src="//platform.houzz.com/js/widgets.js?"+(new Date().getTime());var ss=d.getElementsByTagName(s)[0];ss.parentNode.insertBefore(js,ss);}})(document,"script","houzzwidget-js");
+            </script>
+          </div>
+
+  {% when 'customer-reviews' %}
+
+        {%- if block.settings.customer-image-one -%}
+          {%- assign customer_image_one = block.settings.customer-image-one | img_url: '500x' -%}
+        {%- else -%}
+          {%- assign customer_image_one = 'blank.svg' | asset_url -%}
+        {%- endif -%}
+
+        {%- if block.settings.customer-image-two -%}
+          {%- assign customer_image_two = block.settings.customer-image-two | img_url: '1000x' -%}
+        {%- else -%}
+          {%- assign customer_image_two = 'blank.svg' | asset_url -%}
+        {%- endif -%}
+
+        {%- if block.settings.customer-image-three -%}
+          {%- assign customer_image_three = block.settings.customer-image-three | img_url: '1000x' -%}
+        {%- else -%}
+          {%- assign customer_image_three = 'blank.svg' | asset_url -%}
+        {%- endif -%}
+
+        {%- if block.settings.customer-image-four -%}
+          {%- assign customer_image_four = block.settings.customer-image-four | img_url: '1000x' -%}
+        {%- else -%}
+          {%- assign customer_image_four = 'blank.svg' | asset_url -%}
+        {%- endif -%}
+
+        {%- if block.settings.customer-image-five -%}
+          {%- assign customer_image_five = block.settings.customer-image-five | img_url: '1000x' -%}
+        {%- else -%}
+          {%- assign customer_image_five = 'blank.svg' | asset_url -%}
+        {%- endif -%}
+
+        {%- if block.settings.customer-image-six -%}
+          {%- assign customer_image_six = block.settings.customer-image-six | img_url: '1000x' -%}
+        {%- else -%}
+          {%- assign customer_image_six = 'blank.svg' | asset_url -%}
+        {%- endif -%}
+
+
+          <div class="customer-review-container container wow fadeInUp">
+            <div class="customer-carousel-wrapper">
+              <div class="owl-carousel owl-theme owl-loaded owl-drag testing-carousel">
+                  <div class="item customer-review-slide-1 customer-review-item ">
+                        <div class="customer-text-container" style="background-color:{{ block.settings.customer-review-bg-color }}">
+                          <div class="quote-icon-wrapper">
+                            <img src="{{ 'quote-icon.svg' | asset_url }}" alt="">
+                          </div>
+                          <div class="customer-text-content">
+                            {{ block.settings.customer-review-one }}
+                            <span class="customer-text-author">
+                              {{ block.settings.customer-review-author-one }}
+                            </span>
+                          </div>
+                          </div>
+                          <div class="customer-submitted-image" style="background-image:url({{ customer_image_one }});">
+
+                          </div>
+
+                  </div>
+                  <div class="item customer-review-slide-2 customer-review-item">
+                        <div class="customer-text-container" style="background-color:{{ block.settings.customer-review-bg-color }}">
+                          <div class="quote-icon-wrapper">
+                            <img src="{{ 'quote-icon.svg' | asset_url }}" alt="">
+                          </div>
+                          <div class="customer-text-content">
+                            {{ block.settings.customer-review-two }}
+                            <span class="customer-text-author">
+                              {{ block.settings.customer-review-author-two }}
+                            </span>
+                          </div>
+                        </div>
+                        <div class="customer-submitted-image" style="background-image:url({{ customer_image_two }});">
+
+                        </div>
+                  </div>
+                  <div class="item customer-review-slide-3 customer-review-item">
+                      <div class="customer-text-container" style="background-color:{{ block.settings.customer-review-bg-color }}">
+                        <div class="quote-icon-wrapper">
+                          <img src="{{ 'quote-icon.svg' | asset_url }}" alt="">
+                        </div>
+                        <div class="customer-text-content">
+                          {{ block.settings.customer-review-three }}
+                          <span class="customer-text-author">
+                            {{ block.settings.customer-review-author-three }}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="customer-submitted-image" style="background-image:url({{ customer_image_three }});">
+
+                      </div>
+                  </div>
+                  <div class="item customer-review-slide-4 customer-review-item">
+                      <div class="customer-text-container" style="background-color:{{ block.settings.customer-review-bg-color }}">
+                        <div class="quote-icon-wrapper">
+                          <img src="{{ 'quote-icon.svg' | asset_url }}" alt="">
+                        </div>
+                        <div class="customer-text-content">
+                          {{ block.settings.customer-review-four }}
+                          <span class="customer-text-author">
+                            {{ block.settings.customer-review-author-four }}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="customer-submitted-image" style="background-image:url({{ customer_image_four }});">
+
+                      </div>
+                  </div>
+                  <div class="item customer-review-slide-5 customer-review-item">
+                      <div class="customer-text-container" style="background-color:{{ block.settings.customer-review-bg-color }}">
+                        <div class="quote-icon-wrapper">
+                          <img src="{{ 'quote-icon.svg' | asset_url }}" alt="">
+                        </div>
+                        <div class="customer-text-content">
+                          {{ block.settings.customer-review-five }}
+                          <span class="customer-text-author">
+                            {{ block.settings.customer-review-author-five }}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="customer-submitted-image" style="background-image:url({{ customer_image_five }});">
+
+                      </div>
+                  </div>
+                  <div class="item customer-review-slide-6 customer-review-item">
+                      <div class="customer-text-container" style="background-color:{{ block.settings.customer-review-bg-color }}">
+                        <div class="quote-icon-wrapper">
+                          <img src="{{ 'quote-icon.svg' | asset_url }}" alt="">
+                        </div>
+                        <div class="customer-text-content">
+                          {{ block.settings.customer-review-six }}
+                          <span class="customer-text-author">
+                            {{ block.settings.customer-review-author-six }}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="customer-submitted-image" style="background-image:url({{ customer_image_six }});">
+
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <script type="text/javascript">
+          $(".testing-carousel").owlCarousel({
+            lazyLoad:true,
+            loop:true,
+            autoplay:false,
+            autoplayTimeout:10000,
+            autoplayHoverPause:true,
+            mouseDrag:true,
+            touchDrag:true,
+            singleItem: true,
+            items : 2,
+            pagination:false,
+            navigation:true,
+            nav:true,
+            navText:["<div class='nav-btn prev-slide'><i class='fas fa-angle-left review-angle-left'></i></div>",
+                    "<div class='nav-btn next-slide'><i class='fas fa-angle-right review-angle-right'></i></div>"],
+            dots: true,
+            responsive : {
+                // breakpoint from 0 up
+                0 : {
+                    items:1
+                },
+                // breakpoint from 480 up
+                480 : {
+                  lazyLoad:true,
+                  loop:true,
+                  autoplay:false,
+                  autoplayTimeout:10000,
+                  autoplayHoverPause:true,
+                  mouseDrag:true,
+                  touchDrag:true,
+                  singleItem: true,
+                  items : 1,
+                  pagination:false,
+                  navigation:true,
+                  nav:true,
+                  navText:["<div class='nav-btn prev-slide'><i class='fas fa-angle-left review-angle-left'></i></div>",
+                          "<div class='nav-btn next-slide'><i class='fas fa-angle-right review-angle-right'></i></div>"],
+                  dots: true
+                },
+                800 : {
+                  lazyLoad:true,
+                  loop:true,
+                  autoplay:false,
+                  autoplayTimeout:10000,
+                  autoplayHoverPause:true,
+                  mouseDrag:true,
+                  touchDrag:true,
+                  singleItem: true,
+                  items : 2,
+                  pagination:false,
+                  navigation:true,
+                  nav:true,
+                  navText:["<div class='nav-btn prev-slide'><i class='fas fa-angle-left review-angle-left'></i></div>",
+                          "<div class='nav-btn next-slide'><i class='fas fa-angle-right review-angle-right'></i></div>"],
+                  dots: true
+                }
+            }
+          });
+          </script>
+
+        {% when 'houzz-reviews'%}
+
+        {% if block.settings.border-line-media %}
+
+          <div class="border-line">
+          </div>
+
+        {% endif %}
+
+        <div class="media-review-container houzz-review-container container">
+        <h3 class="wow fadeInUp">{{ block.settings.houzz-four-block-title }}</h3>
+          <div class="media-review-block one-half-cgc wow fadeInUp houzz-review-block" data-wow-delay="0.2s">
+            <div class="media-review-wrapper houzz-review-wrapper" style="background-color:{{ block.settings.houzz-block-bg-color }}">
+              <div class="client-name-container">
+              </div>
+              <div class="media-review-text-content houzz-review-text-content" style="color:{{ block.settings.houzz-block-text-color }}">
+                {{ block.settings.houzz-review-quote-1 }}
+              </div>
+              <div class="client-info-section">
+                <p class="review-by-content" style="margin-bottom:0px;">{{ block.settings.houzz-review-name-one }}</p>
+                <span class="fas fa-star" style="color: gold; font-size: 13px;"></span>
+                <span class="fas fa-star" style="color: gold; font-size: 13px;"></span>
+                <span class="fas fa-star" style="color: gold; font-size: 13px;"></span>
+                <span class="fas fa-star" style="color: gold; font-size: 13px;"></span>
+                <span class="fas fa-star" style="color: gold; font-size: 13px;"></span>
+              </div>
+              <!-- <a href="https://www.houzz.com/pro/creategood/create-good" class="houzz-review-link" target="_blank">Read More <i class="fas fa-caret-right"></i></a> -->
+            </div>
+          </div>
+          <div class="media-review-block one-half-cgc wow fadeInUp houzz-review-block" data-wow-delay="0.3s">
+            <div class="media-review-wrapper houzz-review-wrapper" style="background-color:{{ block.settings.houzz-block-bg-color }}">
+              <div class="client-name-container">
+              </div>
+              <div class="media-review-text-content houzz-review-text-content" style="color:{{ block.settings.houzz-block-text-color }}">
+                {{ block.settings.houzz-review-quote-2 }}
+              </div>
+              <div class="client-info-section">
+                <p class="review-by-content" style="margin-bottom:0px;">{{ block.settings.houzz-review-name-two }}</p>
+                <span class="fas fa-star" style="color: gold; font-size: 13px;"></span>
+                <span class="fas fa-star" style="color: gold; font-size: 13px;"></span>
+                <span class="fas fa-star" style="color: gold; font-size: 13px;"></span>
+                <span class="fas fa-star" style="color: gold; font-size: 13px;"></span>
+                <span class="fas fa-star" style="color: gold; font-size: 13px;"></span>
+              </div>
+              <!-- <a href="https://www.houzz.com/pro/creategood/create-good" class="houzz-review-link" target="_blank">Read More <i class="fas fa-caret-right"></i></a> -->
+            </div>
+          </div>
+          <div class="media-review-block one-half-cgc wow fadeInUp houzz-review-block" data-wow-delay="0.4s">
+            <div class="media-review-wrapper houzz-review-wrapper" style="background-color:{{ block.settings.houzz-block-bg-color }}">
+              <div class="client-name-container">
+              </div>
+              <div class="media-review-text-content houzz-review-text-content" style="color:{{ block.settings.houzz-block-text-color }}">
+                {{ block.settings.houzz-review-quote-3 }}
+              </div>
+              <div class="client-info-section">
+                <p class="review-by-content" style="margin-bottom:0px;">{{ block.settings.houzz-review-name-three }}</p>
+                <span class="fas fa-star" style="color: gold; font-size: 13px;"></span>
+                <span class="fas fa-star" style="color: gold; font-size: 13px;"></span>
+                <span class="fas fa-star" style="color: gold; font-size: 13px;"></span>
+                <span class="fas fa-star" style="color: gold; font-size: 13px;"></span>
+                <span class="fas fa-star" style="color: gold; font-size: 13px;"></span>
+              </div>
+              <!-- <a href="https://www.houzz.com/pro/creategood/create-good" class="houzz-review-link" target="_blank">Read More <i class="fas fa-caret-right"></i></a> -->
+            </div>
+          </div>
+          <div class="media-review-block one-half-cgc wow fadeInUp houzz-review-block" data-wow-delay="0.5s">
+            <div class="media-review-wrapper houzz-review-wrapper" style="background-color:{{ block.settings.houzz-block-bg-color }}">
+              <div class="client-name-container">
+              </div>
+              <div class="media-review-text-content houzz-review-text-content" style="color:{{ block.settings.houzz-block-text-color }}">
+                {{ block.settings.houzz-review-quote-4 }}
+              </div>
+              <div class="client-info-section">
+                <p class="review-by-content" style="margin-bottom:0px;">{{ block.settings.houzz-review-name-four }}</p>
+                <span class="fas fa-star" style="color: gold; font-size: 13px;"></span>
+                <span class="fas fa-star" style="color: gold; font-size: 13px;"></span>
+                <span class="fas fa-star" style="color: gold; font-size: 13px;"></span>
+                <span class="fas fa-star" style="color: gold; font-size: 13px;"></span>
+                <span class="fas fa-star" style="color: gold; font-size: 13px;"></span>
+              </div>
+              <!-- <a href="https://www.houzz.com/pro/creategood/create-good" class="houzz-review-link" target="_blank">Read More <i class="fas fa-caret-right"></i></a> -->
+            </div>
+          </div>
+          <a href="{{ block.settings.houzz-bottom-link-url }}" target="_blank" class="houzz-bottom-link wow fadeInUp" data-wow-delay="0.5s">{{ block.settings.houzz-bottom-link-title }} <i class="fas fa-caret-right"></i></a>
+        </div>
+
+
+  {% endcase %}
+{% endfor %}
+
+<style>
+
+@media only screen and (max-width:1366px){
+
+  .custom-template{
+    width: 100%;
+    padding-top: 0px !important;
+   }
+
+}
+
+</style>
+
+</div>
+
+
+
+
+
+
+{% schema %}
+{
+  "name": "Review page content",
+  "settings": [
+
+  ],
+  "blocks": [
+  {
+    "type": "image-carousel",
+    "name": "Image carousel",
+    "settings": [
+    {
+      "type": "image_picker",
+      "id": "image-slide-1",
+      "label": "Image slider one"
+    },
+    {
+      "type": "image_picker",
+      "id": "image-slide-2",
+      "label": "Image slider two"
+    },
+    {
+      "type": "image_picker",
+      "id": "image-slide-3",
+      "label": "Image slider three"
+    },
+    {
+      "type": "image_picker",
+      "id": "image-slide-4",
+      "label": "Image slider four"
+    },
+    {
+      "type": "image_picker",
+      "id": "image-slide-5",
+      "label": "Image slider five"
+    }
+    ]
+  },
+  {
+    "type": "media-reviews",
+    "name": "Media reviews",
+    "settings": [
+    {
+     "type":      "checkbox",
+     "id":        "border-line-media",
+     "label":     "Border divide line",
+     "default":   true,
+     "info":      "borderline above section"
+    },
+    {
+     "id": "four-block-title",
+     "type": "text",
+     "label": "Section Title",
+     "default": "Title"
+    },
+    {
+       "type":      "color",
+       "id":        "block-bg-color",
+       "label":     "Block background color",
+       "default":   "#EBECE4"
+    },
+    {
+      "type": "image_picker",
+      "id": "review-icon-1",
+      "label": "Icon image",
+      "info": "500 px x 500 px image size minimum"
+    },
+    {
+       "type": "richtext",
+       "id": "review-quote-1",
+       "label": "Review quote text content",
+       "default": "<p>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "review-icon-2",
+      "label": "Icon image",
+      "info": "500 px x 500 px image size minimum"
+    },
+    {
+       "type": "richtext",
+       "id": "review-quote-2",
+       "label": "Review quote text content",
+       "default": "<p>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "review-icon-3",
+      "label": "Icon image",
+      "info": "500 px x 500 px image size minimum"
+    },
+    {
+       "type": "richtext",
+       "id": "review-quote-3",
+       "label": "Review quote text content",
+       "default": "<p>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "review-icon-4",
+      "label": "Icon image",
+      "info": "500 px x 500 px image size minimum"
+    },
+    {
+       "type": "richtext",
+       "id": "review-quote-4",
+       "label": "Review quote text content",
+       "default": "<p>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    }
+    ]
+  },
+  {
+  "type": "houzz-reviews",
+  "name": "Houzz reviews",
+  "settings": [
+  {
+   "type":      "checkbox",
+   "id":        "border-line-media",
+   "label":     "Border divide line",
+   "default":   true,
+   "info":      "borderline above section"
+  },
+  {
+   "id": "houzz-four-block-title",
+   "type": "text",
+   "label": "Section Title",
+   "default": "Title"
+  },
+  {
+     "type": "color",
+     "id": "houzz-block-bg-color",
+     "label": "Block background color",
+     "default": "#ffffff"
+  },
+  {
+     "type":      "color",
+     "id":        "houzz-block-text-color",
+     "label":     "Text color",
+     "default":   "#38373E"
+  },
+  {
+     "type": "richtext",
+     "id": "houzz-review-quote-1",
+     "label": "Review quote text content",
+     "default": "<p>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+  },
+  {
+     "type": "text",
+     "id": "houzz-review-name-one",
+     "label": "review customer's name",
+     "default": "name here"
+  },
+  {
+     "type": "richtext",
+     "id": "houzz-review-quote-2",
+     "label": "Review quote text content",
+     "default": "<p>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+  },
+  {
+     "type": "text",
+     "id": "houzz-review-name-two",
+     "label": "review customer's name",
+     "default": "name here"
+  },
+  {
+     "type": "richtext",
+     "id": "houzz-review-quote-3",
+     "label": "Review quote text content",
+     "default": "<p>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+  },
+  {
+     "type": "text",
+     "id": "houzz-review-name-three",
+     "label": "review customer's name",
+     "default": "name here"
+  },
+  {
+     "type": "richtext",
+     "id": "houzz-review-quote-4",
+     "label": "Review quote text content",
+     "default": "<p>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+  },
+  {
+     "type": "text",
+     "id": "houzz-review-name-four",
+     "label": "review customer's name",
+     "default": "name here"
+  },
+  {
+     "type": "text",
+     "id": "houzz-bottom-link-title",
+     "label": "Bottom review title",
+     "default": "Read more reviews"
+  },
+  {
+     "type": "text",
+     "id": "houzz-bottom-link-url",
+     "label": "Bottom review url",
+     "default": "https://www.houzz.com/pro/creategood/create-good-sinks"
+  }
+  ]
+  },
+  {
+    "type": "review-widget",
+    "name": "Review widget",
+    "settings": [
+    {
+     "type":      "checkbox",
+     "id":        "border-line-review",
+     "label":     "Border divide line",
+     "default":   true,
+     "info":      "borderline above section"
+    },
+    {
+       "type": "text",
+       "id": "leave-review-section-title",
+       "label": "Section Title",
+       "default": "Title"
+    }
+    ]
+  },
+  {
+    "type": "awards",
+    "name": "Awards",
+    "settings": [
+    {
+     "id": "awards-section-title",
+     "type": "text",
+     "label": "awards section title",
+     "default": "TITLE"
+    }
+    ]
+  },
+  {
+    "type": "customer-reviews",
+    "name": "Customer reviews",
+    "settings": [
+    {
+       "type":      "color",
+       "id":        "customer-review-bg-color",
+       "label":     "Block background color",
+       "default":   "#EBECE4"
+    },
+    {
+       "type": "richtext",
+       "id": "customer-review-one",
+       "label": "Customer submitted review",
+       "default": "<p>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+     "id": "customer-review-author-one",
+     "type": "text",
+     "label": "Customer author",
+     "default": "John Doe"
+    },
+    {
+     "id": "customer-review-date-one",
+     "type": "text",
+     "label": "Review Date",
+     "default": "Dec. 4, 2019"
+    },
+    {
+      "type": "image_picker",
+      "id": "customer-image-one",
+      "label": "Customer submitted image",
+      "info": "2000 px x 2000 px image size minimum"
+    },
+    {
+       "type": "richtext",
+       "id": "customer-review-two",
+       "label": "Customer submitted review",
+       "default": "<p>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+     "id": "customer-review-author-two",
+     "type": "text",
+     "label": "Customer author",
+     "default": "John Doe"
+    },
+    {
+     "id": "customer-review-date-two",
+     "type": "text",
+     "label": "Review Date",
+     "default": "Dec. 4, 2019"
+    },
+    {
+      "type": "image_picker",
+      "id": "customer-image-two",
+      "label": "Customer submitted image",
+      "info": "2000 px x 2000 px image size minimum"
+    },
+    {
+       "type": "richtext",
+       "id": "customer-review-three",
+       "label": "Customer submitted review",
+       "default": "<p>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+     "id": "customer-review-author-three",
+     "type": "text",
+     "label": "Customer author",
+     "default": "John Doe"
+    },
+    {
+     "id": "customer-review-date-three",
+     "type": "text",
+     "label": "Review Date",
+     "default": "Dec. 4, 2019"
+    },
+    {
+      "type": "image_picker",
+      "id": "customer-image-three",
+      "label": "Customer submitted image",
+      "info": "2000 px x 2000 px image size minimum"
+    },
+    {
+       "type": "richtext",
+       "id": "customer-review-four",
+       "label": "Customer submitted review",
+       "default": "<p>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+     "id": "customer-review-author-four",
+     "type": "text",
+     "label": "Customer author",
+     "default": "John Doe"
+    },
+    {
+     "id": "customer-review-date-four",
+     "type": "text",
+     "label": "Review Date",
+     "default": "Dec. 4, 2019"
+    },
+    {
+      "type": "image_picker",
+      "id": "customer-image-four",
+      "label": "Customer submitted image",
+      "info": "2000 px x 2000 px image size minimum"
+    },
+    {
+       "type": "richtext",
+       "id": "customer-review-five",
+       "label": "Customer submitted review",
+       "default": "<p>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+     "id": "customer-review-author-five",
+     "type": "text",
+     "label": "Customer author",
+     "default": "John Doe"
+    },
+    {
+     "id": "customer-review-date-five",
+     "type": "text",
+     "label": "Review Date",
+     "default": "Dec. 4, 2019"
+    },
+    {
+      "type": "image_picker",
+      "id": "customer-image-five",
+      "label": "Customer submitted image",
+      "info": "2000 px x 2000 px image size minimum"
+    },
+    {
+       "type": "richtext",
+       "id": "customer-review-six",
+       "label": "Customer submitted review",
+       "default": "<p>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+     "id": "customer-review-author-six",
+     "type": "text",
+     "label": "Customer author",
+     "default": "John Doe"
+    },
+    {
+     "id": "customer-review-date-six",
+     "type": "text",
+     "label": "Review Date",
+     "default": "Dec. 4, 2019"
+    },
+    {
+      "type": "image_picker",
+      "id": "customer-image-six",
+      "label": "Customer submitted image",
+      "info": "2000 px x 2000 px image size minimum"
+    }
+    ]
+  }
+  ],
+  "presets": [
+
+  ]
+}
+{% endschema %}

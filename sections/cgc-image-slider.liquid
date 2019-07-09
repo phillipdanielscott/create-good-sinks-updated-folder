@@ -1,0 +1,472 @@
+{% assign phoneImage = false %}
+
+<script type="text/javascript">
+
+console.log("I am working!");
+
+function setSliderImage() {
+  var tablet = window.matchMedia( "(max-width: 800px)" );
+  var phone = window.matchMedia( "(max-width: 500px)" );
+  var device = phone.matches ? 'phone' : (tablet.matches ? 'tablet' : 'desktop');
+  var deviceWidths = { phone: '500x', tablet: '800x', desktop: '1100x' }
+  var images = document.getElementsByClassName(' top-slider-desktop');
+  Array.from(images).forEach(image => {
+    var background = image.style.backgroundImage
+    var regularImage = image.style
+    image.style.backgroundImage = background.replace('1100x', deviceWidths[device]);
+    console.log(image.style.backgroundImage);
+  });
+  if( device === 'phone' ){
+  {% assign phoneImage = true %}
+  console.log("I am a phone");
+  }
+}
+
+
+window.addEventListener('resize', setSliderImage);
+window.addEventListener('load', setSliderImage);
+
+</script>
+
+<div class="cgc-carousel-wrapper">
+
+  <div class="owl-carousel owl-theme">
+
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'Featured-image' %}
+              {%- if block.settings.Featured-product-full-bg -%}
+              {%- assign featured_image = block.settings.Featured-product-full-bg | img_url: '1100x' -%}
+              {%- else -%}
+                {%- assign about_image = 'blank.svg' | asset_url -%}
+              {%- endif -%}
+
+
+              <div class="item full-bg-image desktop">
+
+                <div  id="topslider" class="featured-image-container top-slider-desktop" style="background-image:url('{{ block.settings.Featured-product-full-bg | img_url: '1100x' }}'); background-position:center; background-repeat: no-repeat; background-size: cover;">
+
+
+                  {% if block.settings.overlay-text-option == "center"%}
+
+                    <div class="slider-text-overlay {{ block.settings.overlay-value }}">
+                      <div class="overlay-text-box" data-animation-in="fadeIn">
+                        <div class="overlay-text animated">
+                          <h3> {{ block.settings.center-text-title }} </h3>
+                        </div>
+                      </div>
+                    </div>
+
+                    {% if block.settings.enable-badge-icon %}
+                    <div class="slide-icon-container wow fadeInUp" data-animation-in="fadeInUp">
+                      <!-- <table style="width:70px;"cellpadding="0" cellspacing="0"><tr><td><a href="https://www.houzz.com/pro/creategood/create-good-sinks-kitchen-sinks-and-accessories"><img src="https://st.hzcdn.com/static/badge_8_8@2x.png" alt="Dan Sullivan in Cincinnati, OH on Houzz" width="70" height="70" border="0" /></a></td></tr></table>
+                      <table style="width:70px;"cellpadding="0" cellspacing="0"><tr><td><a href="https://www.houzz.com/pro/creategood/create-good-sinks-kitchen-sinks-and-accessories"><img src="https://st.hzcdn.com/static/badge_13_8@2x.png" alt="Dan Sullivan in Cincinnati, OH on Houzz" width="70" height="70" border="0" /></a></td></tr></table>
+                      <table style="width:70px;"cellpadding="0" cellspacing="0"><tr><td><a href="https://www.houzz.com/pro/creategood/create-good-sinks-kitchen-sinks-and-accessories"><img src="https://st.hzcdn.com/static/badge_44_8@2x.png" alt="Dan Sullivan in Cincinnati, OH on Houzz" width="70" height="70" border="0" /></a></td></tr></table> -->
+                      <table style="width:70px;"cellpadding="0" cellspacing="0"><tr><td><a href="https://www.houzz.com/pro/creategood/create-good-sinks-kitchen-sinks-and-accessories"><img src="https://st.hzcdn.com/static/badge_47_8@2x.png" alt="Dan Sullivan in Cincinnati, OH on Houzz" width="70" height="70" border="0" /></a></td></tr></table>
+                    </div>
+
+
+                    {% endif %}
+
+                    {% elsif block.settings.overlay-text-option == "left" %}
+                    <div class="slider-text-overlay {{ block.settings.overlay-value }}">
+
+                      {% if block.settings.enable-border-outline %}
+                          <div class="left-overlay-text-box" data-animation-in="fadeInUp" style="width: auto; padding: 16px 30px; border: 2px solid white;">
+
+                        {% else %}
+
+                          <div class="left-overlay-text-box" data-animation-in="fadeInUp">
+                      {% endif %}
+
+                        <div class="left-overlay-text animated" >
+                          <div class="left-text" style="color:{{ block.settings.image-slider-text-color }};">
+                            <h3 style="color:{{ block.settings.image-slider-text-color }};">{{ block.settings.left-text-title }}</h3>
+                            <div class="left-text-content" style="color:{{ block.settings.image-slider-text-color }};"> {{ block.settings.left-text-content }} </div>
+                              {% if block.settings.enable-slide-button %}
+                                <button type="button" name="button" class="slide-button" onclick="location.href='{{ block.settings.left-button-url }}'">{{ block.settings.button_text }}</button>
+                              {% endif %}
+                          </div>
+                        </div>
+                      </div>
+
+                   </div>
+                    {% elsif block.settings.overlay-text-option == "right" %}
+
+                    <div class="slider-text-overlay {{ block.settings.overlay-value }}">
+
+                    {% if block.settings.enable-border-outline %}
+                        <div class="right-overlay-text-box" data-animation-in="fadeInUp" style="width: auto; padding: 16px 30px; border: 2px solid white;">
+
+                      {% else %}
+
+                        <div class="right-overlay-text-box" data-animation-in="fadeInUp">
+
+                    {% endif %}
+
+                          <div class="right-overlay-text animated" >
+                            <div class="right-text" style="color:{{ block.settings.image-slider-text-color }};">
+                              <h3 style="color:{{ block.settings.image-slider-text-color }};">{{ block.settings.right-text-title }}</h3>
+                              <div class="right-text-contnet" style="color:{{ block.settings.image-slider-text-color }};">{{ block.settings.right-text-content }}</div>
+                                {% if block.settings.enable-slide-button %}
+                                  <button type="button" name="button" class="slide-button" onclick="location.href='{{ block.settings.right_button_url }}'"> {{ block.settings.button_text }} </button>
+                                {% endif %}
+                            </div>
+                          </div>
+                        </div>
+
+                    </div>
+
+                    {% elsif block.settings.overlay-text-option == "none" %}
+
+                  {% endif %}
+
+                </div>
+
+
+              </div>
+
+         {% when 'featured-sink'  %}
+         <div class="item featured-sink-item">
+              <div class="featured-sink-bg" style="background-color:{{ block.settings.featured-sink-bg-color }}"></div>
+               <div class="featured-sink-container">
+                 <div class="container full-width" stlye="height:-webkit-fill-available;">
+                   <div class="borderline-left" style="background-color:{{ block.settings.borderline-left }}" data-animation-in="fadeInDown"></div>
+                   <div class="borderline-right"  style="background-color:{{ block.settings.borderline-right }}" data-animation-in="fadeInUp"></div>
+                   <h3 class="offset-text-top animated" style="color:{{ block.settings.featured-text-color}}" data-animation-in="fadeInDown">{{ block.settings.text-top }}</h3>
+                   <h3 class="offset-text-bottom" style="color:{{ block.settings.featured-text-color}}" data-animation-in="fadeInUp">{{ block.settings.text-bottom }}</h3>
+                   {% if phoneImage %}
+
+                   <img src="{{ block.settings.featured-sink-img | img_url: '600x' }}" alt="" class="featured-sink-img top-slider-desktop">
+
+                   {% else %}
+
+                    <img src="{{ block.settings.featured-sink-img | img_url: '1024x' }}" alt="" class="featured-sink-img top-slider-desktop">
+
+                   {% endif %}
+                 </div>
+               </div>
+         </div>
+
+        {% endcase %}
+
+
+
+
+      {% endfor %}
+
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+// Declare Carousel jquery object
+var owl = $('.owl-carousel');
+
+ $(".owl-carousel").owlCarousel({
+   animateIn: 'fadeIn',
+   animateOut: 'fadeOut',
+   lazyLoad:true,
+   loop:true,
+   autoplay:false,
+   autoplayTimeout:5000,
+   autoHeight:true,
+   autoplayHoverPause:true,
+   mouseDrag:true,
+   touchDrag:true,
+   singleItem: true,
+   items : 1,
+   itemsDesktop : false,
+   itemsDesktopSmall : false,
+   itemsTablet: false,
+   dotsData: false,
+   dots:true,
+   itemsMobile: false,
+   nav:true,
+   navText:["<div class='nav-btn prev-slide homepage-top-prev-slide'><i class='fas fa-angle-left homepage-top-angle-left'></i></div>",
+           "<div class='nav-btn next-slide homepage-top-next-slide'><i class='fas fa-angle-right homepage-top-angle-right'></i></div>"],
+   responsive : {
+       // breakpoint from 0 up
+       0 : {
+         dots:false
+       },
+       // breakpoint from 480 up
+       480 : {
+         dots:false
+       },
+       800 : {
+         dots:true
+       }
+   }
+ });
+
+
+
+
+ // // Carousel initialization
+ // owl.owlCarousel({
+ //     loop:false,
+ //     margin:0,
+ //     navSpeed:500,
+ //     nav:true,
+ //     autoplay: true,
+ //     rewind: true,
+ //     items:1
+ // });
+
+ // add animate.css class(es) to the elements to be animated
+   function setAnimation ( _elem, _InOut ) {
+     // Store all animationend event name in a string.
+     // cf animate.css documentation
+     var animationEndEvent = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+
+     _elem.each ( function () {
+       var $elem = $(this);
+       var $animationType = 'animated ' + $elem.data( 'animation-' + _InOut );
+
+       $elem.addClass($animationType).one(animationEndEvent, function () {
+         $elem.removeClass($animationType); // remove animate.css Class at the end of the animations
+       });
+     });
+   }
+
+ // Fired before current slide change
+   owl.on('change.owl.carousel', function(event) {
+       var $currentItem = $('.owl-item', owl).eq(event.item.index);
+       var $elemsToanim = $currentItem.find("[data-animation-out]");
+       setAnimation ($elemsToanim, 'out');
+   });
+
+ // Fired after current slide has been changed
+   var round = 0;
+   owl.on('changed.owl.carousel', function(event) {
+
+       var $currentItem = $('.owl-item', owl).eq(event.item.index);
+       var $elemsToanim = $currentItem.find("[data-animation-in]");
+
+       setAnimation ($elemsToanim, 'in');
+   })
+
+   owl.on('translated.owl.carousel', function(event) {
+     console.log (event.item.index, event.page.count);
+
+       if (event.item.index == (event.page.count - 1))  {
+         if (round < 1) {
+           round++
+           console.log (round);
+         } else {
+           owl.trigger('stop.owl.autoplay');
+           var owlData = owl.data('owl.carousel');
+           owlData.settings.autoplay = false; //don't know if both are necessary
+           owlData.options.autoplay = false;
+           owl.trigger('refresh.owl.carousel');
+         }
+       }
+   });
+
+
+
+
+
+</script>
+
+
+{% schema %}
+{
+	"name": "CGC Image Slider",
+	"max_blocks": 8,
+	"settings": [],
+	"blocks": [
+  {
+		"type": "Featured-image",
+		"name": "Full background image",
+		"settings": [
+    {
+			"type": "image_picker",
+			"id": "Featured-product-full-bg",
+			"label": "Full background image"
+		},
+    {
+			"type": "select",
+			"id": "overlay-text-option",
+			"options": [{
+				"value": "none",
+				"label": "no overlay text"
+			},
+      {
+				"value": "center",
+				"label": "Centered Text"
+			},
+      {
+				"value": "left",
+				"label": "Text align left"
+			},
+      {
+				"value": "right",
+				"label": "Text align right"
+			}
+      ],
+			"default": "none",
+			"label": "Overlay text and placement"
+		},
+    {
+			"type": "color",
+			"id": "image-slider-text-color",
+			"label": "Slider text color",
+			"default": "#ffffff"
+		},
+    {
+    "type": "select",
+    "id": "overlay-value",
+    "label": "background-opacity",
+    "info": "Used to darken image for legible text.",
+    "default": "image-overlay-35",
+    "options": [
+      { "value": "image-overlay-0", "label": "0%"},
+      { "value": "image-overlay-5", "label": "5%"},
+      { "value": "image-overlay-10", "label": "10%"},
+      { "value": "image-overlay-15", "label": "15%"},
+      { "value": "image-overlay-20", "label": "20%"},
+      { "value": "image-overlay-25", "label": "25%"},
+      { "value": "image-overlay-30", "label": "30%"},
+      { "value": "image-overlay-35", "label": "35%"},
+      { "value": "image-overlay-40", "label": "40%"},
+      { "value": "image-overlay-45", "label": "45%"},
+      { "value": "image-overlay-50", "label": "50%"},
+      { "value": "image-overlay-55", "label": "55%"},
+      { "value": "image-overlay-60", "label": "60%"},
+      { "value": "image-overlay-65", "label": "65%"},
+      { "value": "image-overlay-70", "label": "70%"},
+      { "value": "image-overlay-75", "label": "75%"},
+      { "value": "image-overlay-80", "label": "80%"},
+      { "value": "image-overlay-85", "label": "85%"},
+      { "value": "image-overlay-90", "label": "90%"},
+      { "value": "image-overlay-95", "label": "95%"},
+      { "value": "image-overlay-100", "label": "100%"}
+    ]
+    },
+    {
+      "type": "checkbox",
+      "id": "enable-badge-icon",
+      "default": true,
+      "label": "Enable houzz badge icons (for center text only)"
+    },
+    {
+			"id": "center-text-title",
+			"type": "text",
+			"label": "Centered text content",
+			"default": "TEXT"
+		},
+    {
+			"id": "left-text-title",
+			"type": "text",
+			"label": "Left text title",
+			"default": "Left text title"
+		},
+    {
+      "id": "left-button-url",
+      "type": "text",
+      "label": "Left text URL",
+      "default": "https://www.creategoodsinks.com"
+    },
+    {
+			"id": "left-text-content",
+			"type": "richtext",
+			"label": "Left text content",
+			"default": "<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>"
+		},
+    {
+      "id": "right-text-title",
+      "type": "text",
+      "label": "right text title",
+      "default": "right text title"
+    },
+    {
+      "id": "right-text-content",
+      "type": "richtext",
+      "label": "Right text content",
+      "default": "<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>"
+    },
+    {
+			"type": "checkbox",
+			"id": "enable-slide-button",
+			"default": true,
+			"label": "Enable button"
+		},
+    {
+       "type": "text",
+       "id": "button_text",
+       "default": "Text",
+       "label": "Button Text"
+    },
+    {
+       "type": "text",
+       "id": "right_button_url",
+       "default": "https://www.creategoodsinks.com",
+       "label": "Right Button URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable-border-outline",
+      "default": false,
+      "label": "Enable border text outline"
+    }
+    ]
+  	},
+    {
+		"type": "featured-sink",
+		"name": "Featured sink",
+		"settings": [
+    {
+			"type": "image_picker",
+			"id": "featured-sink-img",
+			"label": "Featured sink img"
+		},
+    {
+			"type": "color",
+			"id": "featured-sink-bg-color",
+			"label": "Slide background color",
+			"default": "#EBECE4"
+		},
+    {
+			"type": "color",
+			"id": "featured-text-color",
+			"label": "Font color",
+			"default": "#38373E"
+		},
+    {
+			"type": "color",
+			"id": "borderline-left",
+			"label": "border line left color",
+			"default": "#AAB7B4"
+		},
+    {
+			"type": "color",
+			"id": "borderline-right",
+			"label": "border line right color",
+			"default": "#AAB7B4"
+		},
+    {
+			"id": "text-top",
+			"type": "text",
+			"label": "Featured product title",
+			"default": "Text top"
+		},
+    {
+			"id": "text-bottom",
+			"type": "text",
+			"label": "Featured product title",
+			"default": "Text bottom"
+		}
+    ]
+	}
+  ],
+	"presets": [
+  {
+		"name": "CGC Image Slider",
+		"category": "images"
+	}
+  ]
+}
+{% endschema %}

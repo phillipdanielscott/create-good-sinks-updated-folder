@@ -1,0 +1,45 @@
+<div class="homepage-text-snippit-container">
+  <h4>{{ section.settings.snippit-title }}</h4>
+  {{ section.settings.homepage-text-snippit }}
+  <a href="{{ section.settings.snippit-link-url }}">{{ section.settings.snippit-link-title }}  <i class="fas fa-caret-right"></i></a>
+</div>
+
+
+
+{% schema %}
+{
+  "name": "Homepage text snippit",
+  "settings": [
+    {
+     "type": "text",
+     "id": "snippit-title",
+     "default": "Section title",
+     "label": "Section title"
+   },
+    {
+       "type": "richtext",
+       "id": "homepage-text-snippit",
+       "label": "Text",
+       "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+     "type": "text",
+     "id": "snippit-link-title",
+     "default": "Learn More",
+     "label": "Link title"
+   },
+   {
+    "type": "text",
+    "id": "snippit-link-url",
+    "default": "https://www.creategoodsinks.com",
+    "label": "Link url"
+  }
+  ],
+  "presets": [
+    {
+      "name": "Homepage text snippit",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}

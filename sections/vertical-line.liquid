@@ -1,0 +1,31 @@
+<div class="divider" style="border-top:{{ section.settings.border_width }}px solid {{ section.settings.border-color }};"></div>
+
+{% schema %}
+{
+  "name": "Vertical line seperator",
+  "settings": [
+  {
+     "type":      "color",
+     "id":        "border-color",
+     "label":     "Seperator color",
+     "default":   "#38373E"
+  },
+  {
+    "type":      "range",
+    "id":        "border_width",
+    "min":       1,
+    "max":        8,
+    "step":       1,
+    "unit":       "px",
+    "label":     "Border width",
+    "default":   4
+}
+  ],
+  "presets": [
+    {
+      "name": "Vertical line seperator",
+      "category": "Seperator"
+    }
+  ]
+}
+{% endschema %}

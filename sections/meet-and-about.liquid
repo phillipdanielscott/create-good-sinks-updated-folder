@@ -1,0 +1,619 @@
+<div class="meet-about-wrapper container full-width">
+
+  <h3 class="meet-about-title wow fadeInUp" style="color:{{ section.settings.page-text-color }}">{{ page.title | remove: "-PHILLIP"}}</h3>
+  {% for block in section.blocks %}
+    {% case block.type %}
+
+      {% when 'image-text-side' %}
+      <div class="image-text-content-wrapper" style="background-color:{{ block.settings.image-text-bg-color }}">
+        <div class="image-text-content-container container full-width">
+        {% if block.settings.image_text_alignment == "image-right" %}
+
+            <div class="text-side-content one-half-cgc" >
+              <div class="meet-text-content">
+                <h2 style="color:{{ block.settings.text-side-color }}; border-bottom: 4px solid {{ block.settings.text-side-color}}">
+                  {{ block.settings.image-text-header }}
+                </h2>
+                <div class="text-value" style="color:{{ block.settings.text-side-color }}">{{ block.settings.section-content }}</div>
+              </div>
+            </div>
+            <div class="image-side-content one-half-cgc" style="float: right;">
+              <img src="{{ block.settings.image-side-content | img_url: '1000x' }}" alt="">
+            </div>
+
+        {% else %}
+
+            <div class="image-side-content one-half-cgc">
+              <img src="{{ block.settings.image-side-content | img_url: '1000x' }}" alt="">
+            </div>
+            <div class="text-side-content one-half-cgc" style="float: right;" >
+              <div class="meet-text-content">
+                <h2 style="color:{{ block.settings.text-side-color }}; border-bottom: 4px solid {{ block.settings.text-side-color}}">
+                  {{ block.settings.image-text-header }}
+                </h2>
+                <div class="text-value" style="color:{{ block.settings.text-side-color }}">{{ block.settings.section-content }}</div>
+              </div>
+            </div>
+
+        {% endif %}
+         </div>
+      </div>
+
+
+      {% when 'video-text-side'%}
+
+        <div class="video-section-wrapper" style="background-color:{{ block.settings.video-section-bg-color }}">
+          <div class="video-section-container container full-width meet-about-video-container">
+
+            {% if block.settings.video_text_alignment == "video-right" %}
+
+              <div class="text-side-video one-half-cgc" >
+                <div class="meet-text-content">
+                  <h2 style="color:{{ block.settings.video-side-color }}; border-bottom: 4px solid {{ block.settings.video-side-color}}">
+                    {{ block.settings.video-text-header }}
+                  </h2>
+                  <div class="text-value" style="color:{{ block.settings.video-side-color }}">{{ block.settings.video-section-content }}</div>
+                </div>
+              </div>
+              <div class="video-side-content one-half-cgc meet-about-video-side-content" style="float: right;">
+                  <!-- Copy & Pasted from YouTube -->
+                  <div class="videoWrapper">
+                      <iframe width="100%" height="" src="{{ block.settings.video-url }}" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                  </div>
+              </div>
+
+            {% else %}
+
+            <div class="video-side-content one-half-cgc meet-about-video-side-content">
+                <!-- Copy & Pasted from YouTube -->
+                <div class="videoWrapper">
+                    <iframe width="100%" height="" src="{{ block.settings.video-url }}" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+                </div>
+            </div>
+            <div class="text-side-video one-half-cgc" style="float: right;">
+              <div class="meet-text-content">
+                <h2 style="color:{{ block.settings.video-side-color }}; border-bottom: 4px solid {{ block.settings.video-side-color}}">
+                  {{ block.settings.video-text-header }}
+                </h2>
+                <div class="text-value" style="color:{{ block.settings.video-side-color }}">{{ block.settings.video-section-content }}</div>
+              </div>
+            </div>
+
+             {% endif %}
+
+          </div>
+        </div>
+
+        {% when 'offset-image-text' %}
+
+        {%- if block.settings.offset_image_bg -%}
+          {%- assign offset_bg = block.settings.offset_image_bg| img_url: '1800x' -%}
+        {%- else -%}
+          {%- assign offset_bg = 'blank.svg' | asset_url -%}
+        {%- endif -%}
+
+        <div class="offset-wrapper container full-width">
+
+          <div class="offset-image-section one-half-cgc">
+            <!-- <div class="image-background-block wow fadeInLeft" ></div> -->
+            <!-- <div class="offset-image-border-line wow fadeInRight" style="background-color:{{ block.settings.offset-text-color }}"></div> -->
+            <div class="image-offset-container wow fadeInUp" style="background-image:url({{offset_bg}})"></div>
+          </div>
+          <div class="offset-text-section one-half-cgc" >
+            <!-- <div class="offset-text-container" style="background-color:{{ block.settings.offset-bg-color }}"> -->
+            <div class="offset-text-container">
+              <h2 style="color:{{ block.settings.offset-text-color }}; border-bottom:4px solid {{ block.settings.offset-text-color }}">{{block.settings.offset-section-title}}</h2>
+              <div class="offset-section-content" style="color:{{ block.settings.offset-text-color }};">{{ block.settings.offset-section-content }}</div>
+              <!-- <div class="text-offset-border-line" style="background-color:{{ block.settings.offset-text-color }}"></div> -->
+            </div>
+          </div>
+
+        </div>
+
+        {% when 'four-member-team-bios' %}
+
+          <div class="four-member-bio-wrapper container full-width">
+
+            <!-- Team member one bio image -->
+            {%- if block.settings.team-member-bio-image-one -%}
+              {%- assign bio-pic-one = block.settings.team-member-bio-image-one | img_url: '500x' -%}
+            {%- else -%}
+              {%- assign bio-pic-one = 'blank.svg' | asset_url -%}
+            {%- endif -%}
+
+            <!-- Team member two bio image -->
+            {%- if block.settings.team-member-bio-image-two -%}
+              {%- assign bio-pic-two = block.settings.team-member-bio-image-two | img_url: '500x' -%}
+            {%- else -%}
+              {%- assign bio-pic-two = 'blank.svg' | asset_url -%}
+            {%- endif -%}
+
+            <!-- Team member three bio image -->
+            {%- if block.settings.team-member-bio-image-three -%}
+              {%- assign bio-pic-three = block.settings.team-member-bio-image-three | img_url: '500x' -%}
+            {%- else -%}
+              {%- assign bio-pic-three = 'blank.svg' | asset_url -%}
+            {%- endif -%}
+
+            <!-- Team member four bio image -->
+            {%- if block.settings.team-member-bio-image-four -%}
+              {%- assign bio-pic-four = block.settings.team-member-bio-image-four | img_url: '500x' -%}
+            {%- else -%}
+              {%- assign bio-pic-four = 'blank.svg' | asset_url -%}
+            {%- endif -%}
+
+            <div class="bio-header-content">
+              <div class="bio-section-title wow fadeInDown">
+                <h2>{{ block.settings.team-bio-header }}</h2>
+                <div class="offset-color-square wow fadeInLeft"></div>
+              </div>
+              <div class="bio-section-description wow fadeInDown">
+                {{ block.settings.team-bio-description }}
+                <!-- <div class="offset-color-square-bottom"></div> -->
+              </div>
+            </div>
+
+            <div class="team-member-container one-fourth-cgc wow fadeInDown" data-wow-delay="0.2s">
+              <div class="team-member-bio-pic" style="background-image:url({{ bio-pic-one }})"></div>
+              <p class="member-position">{{ block.settings.team-member-position-one }}</p>
+              <h3 class="member-name">{{ block.settings.team-member-name-one }}</h3>
+              <span class="member-number">{{ block.settings.team-member-number-one }}</span>
+              <span class="member-email">{{ block.settings.team-member-email-one }}</span>
+              <p class="member-description">{{ block.settings.team-member-description-one }}</p>
+            </div>
+
+            <div class="team-member-container one-fourth-cgc wow fadeInDown" data-wow-delay="0.3s">
+              <div class="team-member-bio-pic" style="background-image:url({{ bio-pic-two }})"></div>
+              <p class="member-position">{{ block.settings.team-member-position-two }}</p>
+              <h3 class="member-name">{{ block.settings.team-member-name-two }}</h3>
+              <span class="member-number">{{ block.settings.team-member-number-two }}</span>
+              <span class="member-email">{{ block.settings.team-member-email-two }}</span>
+              <p class="member-description">{{ block.settings.team-member-description-two }}</p>
+            </div>
+
+            <div class="team-member-container one-fourth-cgc wow fadeInDown" data-wow-delay="0.4s">
+              <div class="team-member-bio-pic" style="background-image:url({{ bio-pic-three }})"></div>
+              <p class="member-position">{{ block.settings.team-member-position-three }}</p>
+              <h3 class="member-name">{{ block.settings.team-member-name-three }}</h3>
+              <span class="member-number">{{ block.settings.team-member-number-three }}</span>
+              <span class="member-email">{{ block.settings.team-member-email-three }}</span>
+              <p class="member-description">{{ block.settings.team-member-description-three }}</p>
+            </div>
+
+            <div class="team-member-container one-fourth-cgc wow fadeInDown" data-wow-delay="0.5s">
+              <div class="team-member-bio-pic" style="background-image:url({{ bio-pic-four }})"></div>
+              <p class="member-position">{{ block.settings.team-member-position-four }}</p>
+              <h3 class="member-name">{{ block.settings.team-member-name-four }}</h3>
+              <span class="member-number">{{ block.settings.team-member-number-four }}</span>
+              <span class="member-email">{{ block.settings.team-member-email-four }}</span>
+              <p class="member-description">{{ block.settings.team-member-description-four }}</p>
+            </div>
+
+          </div>
+
+            {% when 'single-member-bio' %}
+
+            <!-- Team member one bio image -->
+            {%- if block.settings.single-member-bio-image-one -%}
+              {%- assign single-bio-pic-one = block.settings.single-member-bio-image-one | img_url: '500x' -%}
+            {%- else -%}
+              {%- assign single-bio-pic-one = 'blank.svg' | asset_url -%}
+            {%- endif -%}
+        <div class="four-member-bio-wrapper container full-width">
+          <div class="single-member-container one-fourth-cgc wow fadeInDown" data-wow-delay="0.5s">
+            <div class="team-member-bio-pic" style="background-image:url({{ single-bio-pic-one }})"></div>
+              <p class="member-position">{{ block.settings.single-member-position-one }}</p>
+              <h3 class="member-name">{{ block.settings.single-member-name-one }}</h3>
+              <span class="member-number">{{ block.settings.single-member-number-one }}</span>
+              <span class="member-email">{{ block.settings.single-member-email-one }}</span>
+              <p class="member-description">{{ block.settings.single-member-description-one }}</p>
+            </div>
+          </div>
+
+
+
+          {% when 'group-team-photo' %}
+
+          {%- if block.settings.team-group-image -%}
+            {%- assign group-pic = block.settings.team-group-image | img_url: '1080x' -%}
+          {%- else -%}
+            {%- assign group-pic = 'blank.svg' | asset_url -%}
+          {%- endif -%}
+
+          <div class="group-team-photo-wrapper container full-width">
+            <div class="group-section-title wow fadeInDown">
+              <h2>{{ block.settings.group-photo-title }}</h2>
+              <div class="offset-color-square-group wow fadeInLeft"></div>
+            </div>
+            <div class="group-description wow fadeInDown">{{ block.settings.group-description }}</div>
+            <div class="group-team-photo wow fadeInUp" style="background-image:url({{ group-pic }})">
+            </div>
+          </div>
+    {% endcase %}
+  {% endfor %}
+
+</div>
+
+<style>
+  .custom-template{
+    width: 100%;
+   }
+</style>
+
+
+{% schema %}
+{
+  "name": "About us/ Meet the team",
+  "settings": [
+  {
+     "type":      "color",
+     "id":        "page-text-color",
+     "label":     "Page title text color",
+     "default":   "#B3C2B8"
+  }
+  ],
+  "blocks": [
+  {
+    "type": "image-text-side",
+    "name": "Image and Text",
+    "settings": [
+    {
+       "type":      "color",
+       "id":        "image-text-bg-color",
+       "label":     "Background color",
+       "default":   "#B3C2B8"
+    },
+    {
+       "type":      "color",
+       "id":        "text-side-color",
+       "label":     "Text color",
+       "default":   "#FBFAFA"
+    },
+    {
+       "type":      "text",
+       "id":        "image-text-header",
+       "label":     "Section Title",
+       "default":   "Title"
+    },
+    {
+       "type": "richtext",
+       "id": "section-content",
+       "label": "Section Content",
+       "default": "<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>"
+    },
+    {
+      "type": "select",
+      "id": "image_text_alignment",
+      "label": "Image and text alignment",
+      "default": "image-right",
+      "options": [
+        { "value": "image-right", "label": "Text left image right"},
+        { "value": "image-left", "label": "Text right image left"}
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "image-side-content",
+      "label": "Logo image"
+    }
+    ]
+  },
+  {
+    "type": "video-text-side",
+    "name": "Video and Text",
+    "settings": [
+    {
+       "type":      "color",
+       "id":        "video-section-bg-color",
+       "label":     "Background color",
+       "default":   "#B3C2B8"
+    },
+    {
+       "type":      "color",
+       "id":        "video-side-color",
+       "label":     "Text color",
+       "default":   "#FBFAFA"
+    },
+    {
+       "type":      "text",
+       "id":        "video-text-header",
+       "label":     "Section Title",
+       "default":   "Title"
+    },
+    {
+       "type": "richtext",
+       "id": "video-section-content",
+       "label": "Section Content",
+       "default": "<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>"
+    },
+    {
+      "type": "select",
+      "id": "video_text_alignment",
+      "label": "Image and text alignment",
+      "default": "video-right",
+      "options": [
+        { "value": "video-right", "label": "Text left video right"},
+        { "value": "video-left", "label": "Text right video left"}
+      ]
+    },
+    {
+     "id": "video-url",
+     "type": "text",
+     "label": "Video Url"
+    }
+
+    ]
+  },
+  {
+    "type": "offset-image-text",
+    "name": "Offset image and text",
+    "settings": [
+    {
+      "type": "image_picker",
+      "id": "offset_image_bg",
+      "label": "Featured image"
+    },
+    {
+       "type":    "text",
+       "id":      "offset-section-title",
+       "label":   "Section Title",
+       "default": "Title"
+    },
+    {
+       "type":      "color",
+       "id":        "offset-text-color",
+       "label":     "Text color",
+       "default":   "#38373E"
+    },
+    {
+       "type":      "color",
+       "id":        "offset-bg-color",
+       "label":     "Background color",
+       "default":   "#EBECE4"
+    },
+    {
+       "type": "richtext",
+       "id": "offset-section-content",
+       "label": "Section Content",
+       "default": "<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>"
+    }
+    ]
+  },
+  {
+    "type": "four-member-team-bios",
+    "name": "Four member team bios",
+    "settings": [
+    {
+       "type":    "text",
+       "id":      "team-bio-header",
+       "label":   "Section Title",
+       "default": "Title"
+    },
+    {
+       "type": "richtext",
+       "id": "team-bio-description",
+       "label": "Section description",
+       "default": "<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "team-member-bio-image-one",
+      "label": "Team member bio image",
+      "info": "recommended minimal photo size: 1000px"
+    },
+    {
+       "type":    "text",
+       "id":      "team-member-position-one",
+       "label":   "Position title",
+       "default": "member position"
+    },
+    {
+       "type":    "text",
+       "id":      "team-member-name-one",
+       "label":   "Name",
+       "default": "Name"
+    },
+    {
+       "type":    "text",
+       "id":      "team-member-number-one",
+       "label":   "Phone number",
+       "default": "888.888.8888"
+    },
+    {
+       "type":    "text",
+       "id":      "team-member-email-one",
+       "label":   "Email",
+       "default": "email@email.com"
+    },
+    {
+       "type":    "textarea",
+       "id":      "team-member-description-one",
+       "label":   "About description",
+       "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+      "type": "image_picker",
+      "id": "team-member-bio-image-two",
+      "label": "Bio image",
+      "info": "recommended minimal photo size: 1000px"
+    },
+    {
+       "type":    "text",
+       "id":      "team-member-position-two",
+       "label":   "Position title",
+       "default": "member position"
+    },
+    {
+       "type":    "text",
+       "id":      "team-member-name-two",
+       "label":   "Name",
+       "default": "Name"
+    },
+    {
+       "type":    "text",
+       "id":      "team-member-number-two",
+       "label":   "Phone number",
+       "default": "888.888.8888"
+    },
+    {
+       "type":    "text",
+       "id":      "team-member-email-two",
+       "label":   "Email",
+       "default": "email@email.com"
+    },
+    {
+       "type":    "textarea",
+       "id":      "team-member-description-two",
+       "label":   "About description",
+       "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+      "type": "image_picker",
+      "id": "team-member-bio-image-three",
+      "label": "Team member bio image",
+      "info": "recommended minimal photo size: 1000px"
+    },
+    {
+       "type":    "text",
+       "id":      "team-member-position-three",
+       "label":   "Position title",
+       "default": "member position"
+    },
+    {
+       "type":    "text",
+       "id":      "team-member-name-three",
+       "label":   "Name",
+       "default": "Name"
+    },
+    {
+       "type":    "text",
+       "id":      "team-member-number-three",
+       "label":   "Phone number",
+       "default": "888.888.8888"
+    },
+    {
+       "type":    "text",
+       "id":      "team-member-email-three",
+       "label":   "Email",
+       "default": "email@email.com"
+    },
+    {
+       "type":    "textarea",
+       "id":      "team-member-description-three",
+       "label":   "About description",
+       "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+      "type": "image_picker",
+      "id": "team-member-bio-image-four",
+      "label": "Team member bio image",
+      "info": "recommended minimal photo size: 1000px"
+    },
+    {
+       "type":    "text",
+       "id":      "team-member-position-four",
+       "label":   "Position title",
+       "default": "member position"
+    },
+    {
+       "type":    "text",
+       "id":      "team-member-name-four",
+       "label":   "Name",
+       "default": "Name"
+    },
+    {
+       "type":    "text",
+       "id":      "team-member-number-four",
+       "label":   "Phone number",
+       "default": "888.888.8888"
+    },
+    {
+       "type":    "text",
+       "id":      "team-member-email-four",
+       "label":   "Email",
+       "default": "email@email.com"
+    },
+    {
+       "type":    "textarea",
+       "id":      "team-member-description-four",
+       "label":   "About description",
+       "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    }
+    ]
+  },
+  {
+    "type": "group-team-photo",
+    "name": "Group team photo",
+    "settings": [
+    {
+      "type": "image_picker",
+      "id": "team-group-image",
+      "label": "Team group photo"
+    },
+    {
+       "type":    "text",
+       "id":      "group-photo-title",
+       "label":   "Section Title",
+       "default": "Title"
+    },
+    {
+       "type": "richtext",
+       "id": "group-description",
+       "label": "Section description",
+       "default": "<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>"
+    }
+    ]
+  },
+  {
+    "type": "single-member-bio",
+    "name": "Single member bio",
+    "settings": [
+    {
+      "type": "image_picker",
+      "id": "single-member-bio-image-one",
+      "label": "Team member bio image",
+      "info": "recommended minimal photo size: 1000px"
+    },
+    {
+       "type":    "text",
+       "id":      "single-member-position-one",
+       "label":   "Position title",
+       "default": "member position"
+    },
+    {
+       "type":    "text",
+       "id":      "single-member-name-one",
+       "label":   "Name",
+       "default": "Name"
+    },
+    {
+       "type":    "text",
+       "id":      "single-member-number-one",
+       "label":   "Phone number",
+       "default": "888.888.8888"
+    },
+    {
+       "type":    "text",
+       "id":      "single-member-email-one",
+       "label":   "Email",
+       "default": "email@email.com"
+    },
+    {
+       "type":    "textarea",
+       "id":      "single-member-description-one",
+       "label":   "About description",
+       "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    }
+    ]
+  }
+
+
+  ],
+  "presets": [
+    {
+      "name": "Product carousel slide",
+      "category": "Product carousel slide"
+    }
+  ]
+}
+{% endschema %}

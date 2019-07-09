@@ -1,0 +1,132 @@
+<div class="offset-image-wrapper" style="background-color:{{ section.settings.offset_bg_color}}">
+  <div class="container offset-image-container">
+    <div class="image-container eight columns">
+      <div class="diagram-left wow fadeInRight" data-wow-delay="0.4s">
+        <div class="diagram-circle">
+            <i class="far fa-circle diagram-circle-left" style="color:{{ section.settings.arrow_colors }}"></i>
+        </div>
+        <div class="diagram-line" style="background-color:{{ section.settings.arrow_colors }}"></div>
+      </div>
+      <!-- <div class="featured-offset-image seven columns" style="background-image:url({{ section.settings.offset-image | img_url: '1000x1000' }})">
+      </div> -->
+      <div class="featured-offset-image wow fadeInDown" style="background-image:url({{ section.settings.offset-image | img_url: '1000x1000' }})">
+      </div>
+    </div>
+    <div class="text-container eight columns">
+      <div class="offset-text-content">
+        <h2 style="color:{{ section.settings.hightlighted_font_color }}">{{ section.settings.offset-section-title }}</h2>
+        <h2 style="color:{{ section.settings.offset_font_color }}">{{ section.settings.offset-section-highlight }}</h2>
+        <div class="border">
+        </div>
+        <p style="color:{{ section.settings.offset_font_color}}">{{ section.settings.offset-section-content }}</p>
+      </div>
+    </div>
+    <div class="text-container eight columns">
+      <div class="offset-text-content text-content-two">
+        <h2 style="color:{{ section.settings.hightlighted_font_color }}">{{ section.settings.offset-section-title-two }}</h2>
+        <h2 style="color:{{ section.settings.offset_font_color }}">{{ section.settings.offset-section-highlight-two }}</h2>
+        <div class="border">
+        </div>
+        <p style="color:{{ section.settings.offset_font_color}}">{{ section.settings.offset-section-content-two }}</p>
+      </div>
+    </div>
+    <div class="image-container eight columns">
+      <div class="diagram-box-right wow fadeInLeft" data-wow-delay="0.6s">
+        <div class="diagram-circle-right">
+            <i class="far fa-circle diagram-circle-two" style="color:{{ section.settings.arrow_colors }}"></i>
+        </div>
+        <div class="diagram-line-two" style="background-color:{{ section.settings.arrow_colors }}"></div>
+      </div>
+      <!-- <div class="featured-offset-image-two seven columns" style="background-image:url({{ section.settings.offset-image-two | img_url: '1000x1000' }})">
+      </div> -->
+      <div class="featured-offset-image-two wow fadeInUp" style="background-image:url({{ section.settings.offset-image-two | img_url: '1000x1000' }})">
+      </div>
+   </div>
+  </div>
+
+</div>
+
+
+{% schema %}
+{
+  "name": "Offset Image and text",
+  "settings": [
+    {
+      "type": "color",
+      "id": "offset_bg_color",
+      "label": "Background color",
+      "default": "#080808"
+    },
+    {
+      "type": "color",
+      "id": "offset_font_color",
+      "label": "font color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "arrow_colors",
+      "label": "arrow colors",
+      "default": "#ffffff"
+    },
+    {
+      "id": "offset-section-title",
+      "type": "text",
+      "label": "Text Title",
+      "default": "Title"
+    },
+    {
+      "id": "offset-section-highlight",
+      "type": "text",
+      "label": "Hightlighted Title One",
+      "default": "Title"
+    },
+    {
+      "type": "color",
+      "id": "hightlighted_font_color",
+      "label": "Hightlighted font color",
+      "default": "#D48166"
+    },
+    {
+       "id": "offset-section-content",
+       "type": "textarea",
+       "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+       "label": "Text Content"
+    },
+    {
+      "id": "offset-image",
+      "type": "image_picker",
+      "label": "Offset image"
+    },
+    {
+      "id": "offset-section-title-two",
+      "type": "text",
+      "label": "Text Title",
+      "default": "Title"
+    },
+    {
+      "id": "offset-section-highlight-two",
+      "type": "text",
+      "label": "Hightlighted Title One",
+      "default": "Title"
+    },
+    {
+       "id": "offset-section-content-two",
+       "type": "textarea",
+       "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+       "label": "Text Content"
+    },
+    {
+      "id": "offset-image-two",
+      "type": "image_picker",
+      "label": "Offset image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Offset Image and text",
+      "category": "Offset Image and text"
+    }
+  ]
+}
+{% endschema %}

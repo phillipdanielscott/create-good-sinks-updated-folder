@@ -1,0 +1,482 @@
+{% if section.settings.carousel_boolean %}
+<div class="faq-wrapper container">
+
+    {%- if section.settings.image-slide-1 -%}
+      {%- assign image_slide_one = section.settings.image-slide-1| img_url: '1800x' -%}
+    {%- else -%}
+      {%- assign image_slide_one = 'blank.svg' | asset_url -%}
+    {%- endif -%}
+
+    {%- if section.settings.image-slide-2 -%}
+      {%- assign image_slide_two = section.settings.image-slide-2| img_url: '1800x' -%}
+    {%- else -%}
+      {%- assign image_slide_two = 'blank.svg' | asset_url -%}
+    {%- endif -%}
+
+    {%- if section.settings.image-slide-3 -%}
+      {%- assign image_slide_three = section.settings.image-slide-3| img_url: '1800x' -%}
+    {%- else -%}
+      {%- assign image_slide_three = 'blank.svg' | asset_url -%}
+    {%- endif -%}
+
+    {%- if section.settings.image-slide-4 -%}
+      {%- assign image_slide_four = section.settings.image-slide-4| img_url: '1800x' -%}
+    {%- else -%}
+      {%- assign image_slide_four = 'blank.svg' | asset_url -%}
+    {%- endif -%}
+
+    {%- if section.settings.image-slide-5 -%}
+      {%- assign image_slide_five = section.settings.image-slide-5| img_url: '1800x' -%}
+    {%- else -%}
+      {%- assign image_slide_five = 'blank.svg' | asset_url -%}
+    {%- endif -%}
+
+
+
+
+
+      <div class="review-carousel-wrapper faq-carousel-wrapper">
+        <div class="owl-carousel owl-theme owl-loaded owl-drag review-image-slider">
+            <div class="item review-slide-1" style="background-image:url( {{ image_slide_one }}); background-position:center; background-repeat: no-repeat; background-size: cover;"></div>
+            <div class="item review-slide-2" style="background-image:url( {{ image_slide_two }}); background-position:center; background-repeat: no-repeat; background-size: cover;"></div>
+            <div class="item review-slide-3" style="background-image:url( {{ image_slide_three }}); background-position:center; background-repeat: no-repeat; background-size: cover;"></div>
+            <div class="item review-slide-4" style="background-image:url( {{ image_slide_four }}); background-position:center; background-repeat: no-repeat; background-size: cover;"></div>
+            <div class="item review-slide-5" style="background-image:url( {{ image_slide_five }}); background-position:center; background-repeat: no-repeat; background-size: cover;"></div>
+        </div>
+      </div>
+
+
+
+    <script type="text/javascript">
+    $(".owl-carousel").owlCarousel({
+      lazyLoad:true,
+      loop:true,
+      autoplay:true,
+      autoplayTimeout:8000,
+      autoplayHoverPause:true,
+      mouseDrag:true,
+      touchDrag:true,
+      singleItem: true,
+      items : 1,
+      pagination:false,
+      itemsDesktop : false,
+      itemsDesktopSmall : false,
+      itemsTablet: false,
+      nav:true,
+      navText:["<div class='nav-btn prev-slide'><i class='fas fa-angle-left review-angle-left'></i></div>",
+              "<div class='nav-btn next-slide'><i class='fas fa-angle-right review-angle-right'></i></div>"],
+      dots: true
+    });
+    </script>
+
+</div>
+
+{% endif %}
+
+    <div class="faq-question-wrapper full-width-cgc" style="background-color:{{ section.settings.faq-bg-color }};">
+
+      <h1>{{ page.title | remove: "-cgc" }}</h1>
+
+      <div class="faq-content-container container">
+        {% for block in section.blocks %}
+            {% case block.type %}
+
+            {% when "faq-question"%}
+
+            <div class="faq-spacer">
+              <button class="collapsible"><i class="far fa-question-circle"></i><span class="faq-text-question">{{ block.settings.faq-question }}</span></button>
+              <div class="collapsibleContent">
+                <div class="faq-answer"><p>{{ block.settings.faq-answer }}</p></div>
+              </div>
+            </div>
+
+            {% when "faq-with-images"%}
+
+            {%- if block.settings.faq-image-one -%}
+              {%- assign faq_image_one = block.settings.faq-image-one | img_url: '1000x' -%}
+            {%- else -%}
+              {%- assign faq_image_one = 'blank.svg' | asset_url -%}
+            {%- endif -%}
+
+            {%- if block.settings.faq-image-two -%}
+              {%- assign faq_image_two = block.settings.faq-image-two | img_url: '1000x' -%}
+            {%- else -%}
+              {%- assign faq_image_two = 'blank.svg' | asset_url -%}
+            {%- endif -%}
+
+            {%- if block.settings.faq-image-three -%}
+              {%- assign faq_image_three = block.settings.faq-image-three | img_url: '1000x' -%}
+            {%- else -%}
+              {%- assign faq_image_three = 'blank.svg' | asset_url -%}
+            {%- endif -%}
+
+            <div class="faq-spacer">
+              <button class="collapsible"><i class="far fa-question-circle"></i><span class="faq-text-question">{{ block.settings.faq-question-with-image }}</span></button>
+              <div class="collapsibleContent">
+                <img src="{{ faq_image_one }}" alt="">
+                <div class="faq-answer">{{ block.settings.faq-answer-with-image }}</div>
+                <img src="{{ faq_image_two }}" alt="">
+                <div class="faq-answer">{{ block.settings.faq-answer-with-image-two }}</div>
+                <img src="{{ faq_image_three }}" alt="">
+                <div class="faq-answer">{{ block.settings.faq-answer-with-image-three }}</div>
+              </div>
+            </div>
+
+            {% when "faq-two-images"%}
+
+
+            {%- if block.settings.faq-two-image-one -%}
+              {%- assign faq_image_two_one = block.settings.faq-two-image-one | img_url: '1000x' -%}
+            {%- else -%}
+              {%- assign faq_image_two_one = 'blank.svg' | asset_url -%}
+            {%- endif -%}
+
+            {%- if block.settings.faq-two-image-two -%}
+              {%- assign faq_image_two_two = block.settings.faq-two-image-two | img_url: '1000x' -%}
+            {%- else -%}
+              {%- assign faq_image_two_two = 'blank.svg' | asset_url -%}
+            {%- endif -%}
+
+            <div class="faq-spacer">
+              <button class="collapsible"><i class="far fa-question-circle"></i><span class="faq-text-question">{{ block.settings.faq-two-image-question }}</span></button>
+              <div class="collapsibleContent">
+                <div class="faq-answer">{{ block.settings.faq-two-image-answer }}</div>
+                <span>{{block.settings.faq-image-title-one }}</span>
+                <img src="{{ faq_image_two_one }}" alt="">
+                <span>{{block.settings.faq-image-title-two }}</span>
+                <img src="{{ faq_image_two_two }}" alt="">
+              </div>
+            </div>
+
+
+          {% when "faq-one-image"%}
+
+
+          {%- if block.settings.faq-one-image-one -%}
+            {%- assign faq_image_one_one = block.settings.faq-one-image-one | img_url: '1000x' -%}
+          {%- else -%}
+            {%- assign faq_image_one_one = 'blank.svg' | asset_url -%}
+          {%- endif -%}
+
+          <div class="faq-spacer">
+            <button class="collapsible"><i class="far fa-question-circle"></i><span class="faq-text-question">{{ block.settings.faq-one-image-question }}</span></button>
+            <div class="collapsibleContent">
+              <div class="faq-answer">{{ block.settings.faq-one-image-answer }}</div>
+              <img src="{{ faq_image_one_one }}" alt="">
+            </div>
+          </div>
+
+
+
+        {% endcase %}
+        {% endfor %}
+      </div>
+
+
+       <h1>SPECIAL FEATURES</h1>
+       <div class="special-features-container container">
+
+
+       {% for block in section.blocks %}
+           {% case block.type %}
+
+           {% when "special-feature" %}
+
+             <div class="faq-spacer">
+               <button class="collapsible">
+                 <!-- <i class="far fa-question-circle"></i> -->
+              <span class="faq-text-question">{{ block.settings.special-feature-item-title }}</span></button>
+               <div class="collapsibleContent">
+                 <div class="faq-answer">
+                   {{ block.settings.special-feature-item-description }}
+                   <p><a href="{{ block.settings.special-feature-page-link }}" class="feature-learn-more-btn">LEARN MORE <i class="fas fa-caret-right"></i></a></p>
+                 </div>
+
+               </div>
+             </div>
+
+           {% endcase %}
+
+
+       {% endfor %}
+      </div>
+    </div>
+
+<div class="container faq-contact-container-bottom">
+
+<h1>Have more questions? </h1>
+    <div class="form-container faq-contact-contact-container">
+
+      {% form 'contact' %}
+        {% if form.posted_successfully? %}
+          <p class="quote">{{ 'contact.form.post_success' | t }}</p>
+        {% endif %}
+
+        {% if form.errors %}
+          <p class="quote">{{ 'general.forms.post_error' | t }}</p>
+
+         {% assign message = 'contact.form.message' | t %}
+          <ul class="center">
+            {% for field in form.errors %}
+              {% if field == 'form' %}
+                <li>
+                  {{ form.errors.messages[field] }}
+                </li>
+              {% else %}
+                <li>
+                  {% assign field_name = field | replace: 'body', message %}
+                  {{ 'general.forms.post_field_error_html' | t: field: field_name, error: form.errors.messages[field] }}
+                </li>
+              {% endif %}
+            {% endfor %}
+           </ul>
+        {% endif %}
+
+         <br class="clear" />
+         <!-- <div class="five columns alpha name-row"> -->
+          <div class="name-row">
+          {% assign name_attr = 'contact.form.name' | handle %}
+          <label for="contactFormName">{{ 'contact.form.name' | t }} <span class="red">*</span></label>
+          <input type="text" id="contactFormName" name="contact[{{ name_attr }}]" placeholder="{{ 'contact.form.name' | t }}" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}" required="required">
+         </div>
+         <!-- <div class="five columns omega email-row"> -->
+          <div class="email-row">
+          <label for="contactFormEmail">{{ 'contact.form.email' | t }} <span class="red">*</span></label>
+          <input type="email" id="contactFormEmail" name="contact[email]" placeholder="{{ 'contact.form.email' | t }}" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" required="required">
+         </div>
+         {% comment %}
+          {% assign name_attr = 'contact.form.phone' | t | handle %}
+          <label for="contactFormPhone" class="hidden-label">{{ 'contact.form.phone' | t }}</label>
+          <input type="tel" id="contactFormPhone" name="contact[{{ name_attr }}]" placeholder="{{ 'contact.form.phone' | t }}" pattern="[0-9\-]*" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+          {% endcomment %}
+
+        <label for="contactFormMessage">{{ 'contact.form.message' | t }} <span class="red wow fadeInUp" data-wow-delay="0.4s">*</span></label>
+        <textarea rows="5" id="contactFormMessage" name="contact[body]" placeholder="{{ 'contact.form.message' | t }}" required="required">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+
+        <input type="submit" class="submit action_button" value="{{ 'contact.form.send' | t }}" />
+      {% endform %}
+
+
+      {% if section.settings.faq_box %}
+        <div class="faq-contact-container">
+          <h4> {{ section.settings.faq-box-title }} </h4>
+          <span><a href="{{ section.settings.faq-box-url }}"> {{ section.settings.faq-box-content }} </a></span>
+        </div>
+      {% endif %}
+
+    </div>
+</div>
+
+<style>
+  .custom-template{
+    width: 100%;
+    padding: 0px;
+   }
+</style>
+
+<!-- {
+ "type": "checkbox",
+ "id": "carousel_boolean",
+ "default": false,
+ "label": "Enable top image slider"
+}, -->
+
+<!-- {
+  "type": "image_picker",
+  "id": "image-slide-1",
+  "label": "Image slider one"
+},
+{
+  "type": "image_picker",
+  "id": "image-slide-2",
+  "label": "Image slider two"
+},
+{
+  "type": "image_picker",
+  "id": "image-slide-3",
+  "label": "Image slider three"
+},
+{
+  "type": "image_picker",
+  "id": "image-slide-4",
+  "label": "Image slider four"
+},
+{
+  "type": "image_picker",
+  "id": "image-slide-5",
+  "label": "Image slider five"
+} -->
+
+{% schema %}
+{
+  "name": "FAQ content",
+  "settings": [
+  {
+    "type":      "color",
+    "id":        "faq-bg-color",
+    "label":     "background color",
+    "default":   "#EBECE4"
+  }
+  ],
+  "blocks": [
+  {
+    "type": "faq-question",
+    "name": "FAQ question title",
+    "settings": [
+    {
+     "type":      "text",
+     "id":        "faq-question",
+     "label":     "FAQ question",
+     "default":   "This is a placeholder for FAQ question?"
+   },
+   {
+      "type": "textarea",
+      "id": "faq-answer",
+      "label": "Text",
+      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+   }
+    ]
+  },
+  {
+    "type": "faq-with-images",
+    "name": "FAQ question with images",
+    "settings": [
+    {
+     "type":      "text",
+     "id":        "faq-question-with-image",
+     "label":     "FAQ question",
+     "default":   "This is a placeholder for FAQ question?"
+   },
+   {
+      "type": "richtext",
+      "id": "faq-answer-with-image",
+      "label": "FAQ answer",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>"
+   },
+   {
+     "type": "image_picker",
+     "id": "faq-image-one",
+     "label": "FAQ answer image"
+   },
+   {
+      "type": "richtext",
+      "id": "faq-answer-with-image-two",
+      "label": "FAQ answer",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>"
+   },
+   {
+     "type": "image_picker",
+     "id": "faq-image-two",
+     "label": "FAQ answer image for section two"
+   },
+   {
+     "type": "image_picker",
+     "id": "faq-image-three",
+     "label": "FAQ answer image"
+   },
+   {
+      "type": "richtext",
+      "id": "faq-answer-with-image-three",
+      "label": "FAQ answer",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>"
+   }
+    ]
+  },
+  {
+    "type": "faq-two-images",
+    "name": "FAQ with two images",
+    "settings": [
+    {
+     "type":      "text",
+     "id":        "faq-two-image-question",
+     "label":     "FAQ question",
+     "default":   "This is a placeholder for FAQ question?"
+    },
+    {
+       "type": "richtext",
+       "id": "faq-two-image-answer",
+       "label": "FAQ answer",
+       "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>"
+    },
+    {
+     "type":      "text",
+     "id":        "faq-image-title-one",
+     "label":     "FAQ image title",
+     "default":   "This is a placeholder for FAQ question?"
+    },
+    {
+      "type": "image_picker",
+      "id": "faq-two-image-one",
+      "label": "FAQ answer image"
+    },
+    {
+     "type":      "text",
+     "id":        "faq-image-title-two",
+     "label":     "FAQ image title",
+     "default":   "This is a placeholder for FAQ question?"
+    },
+    {
+      "type": "image_picker",
+      "id": "faq-two-image-two",
+      "label": "FAQ answer image"
+    }
+    ]
+  },
+  {
+    "type": "faq-one-image",
+    "name": "FAQ with one image",
+    "settings": [
+    {
+     "type":      "text",
+     "id":        "faq-one-image-question",
+     "label":     "FAQ question",
+     "default":   "This is a placeholder for FAQ question?"
+    },
+    {
+       "type": "richtext",
+       "id": "faq-one-image-answer",
+       "label": "FAQ answer",
+       "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "faq-one-image-one",
+      "label": "FAQ answer image"
+    }
+    ]
+  },
+  {
+    "type": "special-feature",
+    "name": "Special Feature Item",
+    "settings": [
+    {
+     "type":      "text",
+     "id":        "special-feature-item-title",
+     "label":     "Special Feature title",
+     "default":   "This is a placeholder for Special Feature Title"
+   },
+   {
+    "type":      "richtext",
+    "id":        "special-feature-item-description",
+    "label":     "Special Feature Description",
+    "default":   "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>"
+  },
+   {
+    "type":      "text",
+    "id":        "special-feature-page-link",
+    "label":     "URL to specific featured page",
+    "default":   "https://www.creategoodsinks.com/"
+   }
+    ]
+  }
+
+
+  ],
+  "presets": [
+    {
+      "name": "FAQ image slider",
+      "category": "images"
+    }
+  ]
+}
+{% endschema %}

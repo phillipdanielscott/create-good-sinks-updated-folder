@@ -1,0 +1,151 @@
+<div class="installation-page-wrapper container">
+  <h1>{{ page.title }}</h1>
+
+  {% for block in section.blocks %}
+    {% case block.type %}
+
+      {% when 'info-box'%}
+          <div class="instruction-link-box wow fadeInUp" style="background-color:{{ block.settings.info-box-color }}">
+            <a href="{{ block.settings.installation-link }}" target="_blank" ><h6>{{ block.settings.installation-info-title }}</h6></a>
+            <!-- <span>{{ block.settings.installation-info-description }}</span> -->
+          </div>
+
+      {% when 'installation-video'%}
+        <div class="video-section-container instructional-video-container">
+          <div class="container full-width">
+              <div class="videoWrapper wow fadeInUp">
+                  <!-- Copy & Pasted from YouTube -->
+                  <iframe width="100%" height="" src="{{ block.settings.install-video-url }}" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+              </div>
+          </div>
+        </div>
+
+      {% when 'installation-tip' %}
+
+        <div class="installation-tip-container container-fluid">
+          <div class="installation-tip-content wow fadeInUp">
+            <h4>{{ block.settings.install-tip-title }}</h4>
+            <div class="tip-text-content">
+              {{ block.settings.tip-instruction }}
+            </div>
+          </div>
+        </div>
+
+      {% when 'installation-image' %}
+
+      {%- if block.settings.instruction-image -%}
+        {%- assign instruction_image = block.settings.instruction-image | img_url: '800x' -%}
+      {%- else -%}
+        {%- assign instruction_image = 'blank.svg' | asset_url -%}
+      {%- endif -%}
+      <span class="install-image-description wow fadeInUp" data-wow-delay="0.2s"> {{ block.settings.instruction-image-description }} </span>
+      <div class="image-instruction-container wow fadeInUp" data-wow-delay="0.3s">
+        <img src="{{ instruction_image }}" alt="">
+      </div>
+
+    {% endcase %}
+  {% endfor %}
+</div>
+
+<style>
+  .custom-template{
+    width: 100%;
+    padding: 0px;
+   }
+</style>
+
+{% schema %}
+{
+  "name": "intallation content",
+  "max_blocks": 8,
+  "settings": [
+
+  ],
+  "blocks": [
+  {
+    "type": "info-box",
+    "name": "Installation info",
+    "settings": [
+    {
+     "type": "color",
+     "id": "info-box-color",
+     "label": "Info box background color",
+     "default": "#EBECE4"
+   },
+    {
+     "type":      "text",
+     "id":        "installation-info-title",
+     "label":     "Installation info title",
+     "default":   "value",
+     "placeholder": "Text"
+   },
+   {
+    "type":      "text",
+    "id":        "installation-link",
+    "label":     "Installation link URL",
+    "default":   "https://www.creategoodsinks.com/",
+    "placeholder": "https://www.creategoodsinks.com/"
+   }
+
+    ]
+  },
+  {
+    "type": "installation-video",
+    "name": "Installation video URL",
+    "settings": [
+    {
+     "type":      "text",
+     "id":        "install-video-url",
+     "label":     "Video URL"
+    }
+
+    ]
+  },
+  {
+    "type": "installation-tip",
+    "name": "Instruction tip",
+    "settings": [
+    {
+     "type":      "text",
+     "id":        "install-tip-title",
+     "label":     "Install tip title",
+     "info": "Tip title",
+     "default":   "TIP"
+   },
+   {
+      "type": "richtext",
+      "id": "tip-instruction",
+      "label": "Tip instruction",
+      "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+   }
+
+    ]
+  },
+  {
+    "type": "installation-image",
+    "name": "Instruction image",
+    "settings": [
+    {
+     "type":      "text",
+     "id":        "instruction-image-description",
+     "label":     "Instruction image description",
+     "default":   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+   },
+   {
+      "type": "image_picker",
+      "id": "instruction-image",
+      "label": "Instruction image"
+   }
+
+    ]
+  }
+
+  ],
+  "presets": [
+    {
+      "name": "installation-content",
+      "category": "images"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,357 @@
+<script type="text/javascript">
+
+function setSliderImage() {
+  var tablet = window.matchMedia( "(max-width: 800px)" );
+  var phone = window.matchMedia( "(max-width: 500px)" );
+  var device = phone.matches ? 'phone' : (tablet.matches ? 'tablet' : 'desktop');
+  var deviceWidths = { phone: '500x', tablet: '800x', desktop: '1100x' }
+  var images = document.getElementsByClassName('bottom-slider-desktop');
+  Array.from(images).forEach(image => {
+    var background = image.style.backgroundImage
+    image.style.backgroundImage = background.replace('1100x', deviceWidths[device]);
+    // console.log(image.style.backgroundImage)
+  })
+}
+
+window.addEventListener('resize', setSliderImage);
+window.addEventListener('load', setSliderImage);
+
+</script>
+
+  <div class="grid-layout-container">
+
+      <div class="larger-image-half">
+        <div class="larger-half-images owl-carousel owl-theme parent larger-image-container">
+
+          {% for block in section.blocks %}
+          {%- if block.settings.larger-section-bg -%}
+            {%- assign larger_image = block.settings.larger-section-bg | img_url: '1800x' -%}
+          {%- else -%}
+            {%- assign larger_image = 'blank.svg' | asset_url -%}
+          {%- endif -%}
+
+          <div class="item">
+            <div id="topslider" class="larger-image-item bottom-slider-desktop" style="background-image:url({{ block.settings.larger-section-bg | img_url: '1100x' }}); background-position:{{ block.settings.bg_image_position }}; background-repeat: no-repeat; background-size: cover;">
+
+            </div>
+          </div>
+
+          {% endfor %}
+
+        </div>
+      </div>
+
+       <div class="image-and-text-half">
+         <div class="smaller-image-container owl-carousel owl-theme child">
+           {% for block in section.blocks %}
+           {%- if block.settings.smaller-section-bg -%}
+             {%- assign smaller_image = block.settings.smaller-section-bg | img_url: '1800x' -%}
+           {%- else -%}
+             {%- assign smaller_image = 'blank.svg' | asset_url -%}
+           {%- endif -%}
+
+           <div class="item">
+             <div class="smaller-image-item bottom-slider-desktop" style="background-image:url({{ block.settings.smaller-section-bg | img_url: '1100x' }}); background-position:{{ block.settings.bg_small_image_position }}; background-repeat: no-repeat; background-size: cover;">
+             </div>
+           </div>
+
+           {% endfor %}
+
+         </div>
+         <div class="grid-text-content">
+
+              <div class="owl-carousel owl-theme child">
+                {% for block in section.blocks %}
+                  <div class="item grid-text-item" style="background-color:{{ block.settings.block-color-bg }}">
+                    <div class="grid-text">
+                      <p style="color:{{ block.settings.block-text-color }}">
+                        {{ block.settings.grid-text-content }}
+                        {% if block.settings.enable_link_text %}
+                          <a href="{{ block.settings.learn-more-url }}" class="dynamic-text-link" style="color:{{ block.settings.block-link-color }}"> {{ block.settings.learn-more-title }} <i class="fas fa-caret-right" style="color:{{ block.settings.block-link-color }}"></i> </a>
+                        {% endif %}
+                      </p>
+                    </div>
+                  </div>
+                {% endfor %}
+             </div>
+         </div>
+        </div>
+
+  </div>
+
+
+<style>
+/* .owl-carousel { margin:10px auto; width:400px; max-width:95%; } */
+.in-sync, .in-link { border:1px solid #639; box-sizing:border-box }
+/*.child .current { border:2px solid #639; box-sizing:border-box }*/
+.child .current img { transform-style:flat!important }
+.owl-nav {
+  text-transform:  uppercase;
+  font-family:  arial;
+  font-size:  12px;
+  padding: 12px;
+}
+.owl-prev {
+  display: inline-block;
+}
+.owl-next {
+  display: inline-block;
+  float: right;
+}
+</style>
+
+<script type="text/javascript">
+/**
+ * Plugin for linking multiple owl instances
+ * @version 1.0.0
+ * @author David Deutsch
+ * @license The MIT License (MIT)
+ */
+;(function($, window, document, undefined) {
+    /**
+     * Creates the Linked plugin.
+     * @class The Linked Plugin
+     * @param {Owl} carousel - The Owl Carousel
+     */
+    var Linked = function(carousel) {
+        /**
+         * Reference to the core.
+         * @protected
+         * @type {Owl}
+         */
+        this._core = carousel;
+
+        /**
+         * All event handlers.
+         * @protected
+         * @type {Object}
+         */
+        this._handlers = {
+            'dragged.owl.carousel changed.owl.carousel': $.proxy(function(e) {
+                if (e.namespace && this._core.settings.linked) {
+                    this.update(e);
+                }
+            }, this),
+            'linked.to.owl.carousel': $.proxy(function(e, index, speed, standard, propagate) {
+                if (e.namespace && this._core.settings.linked) {
+                    this.toSlide(index, speed, propagate);
+                }
+            }, this)
+        };
+
+        // register event handlers
+        this._core.$element.on(this._handlers);
+
+        // set default options
+        this._core.options = $.extend({}, Linked.Defaults, this._core.options);
+    };
+
+    /**
+     * Default options.
+     * @public
+     */
+    Linked.Defaults = {
+        linked: false
+    };
+
+    /**
+     * Updated linked instances
+     */
+    Linked.prototype.update = function(e) {
+        this.toSlide( e.relatedTarget.relative(e.item.index) );
+    };
+
+    /**
+     * Carry out the to.owl.carousel proxy function
+     * @param {int} index
+     * @param {int} speed
+     * @param {bool} propagate
+     */
+    Linked.prototype.toSlide = function(index, speed, propagate) {
+        var id = this._core.$element.attr('id'),
+            linked = typeof(this._core.settings.linked) === 'string' ? this._core.settings.linked.split(',') : this._core.settings.linked;
+
+        if ( typeof propagate == 'undefined' ) {
+            propagate = true;
+        }
+
+        index = index || 0;
+
+        if ( propagate ) {
+            $.each(linked, function(i, el){
+                $(el).trigger('linked.to.owl.carousel', [index, 300, true, false]);
+            });
+        } else {
+            this._core.$element.trigger('to.owl.carousel', [index, 300, true]);
+
+            if ( this._core.settings.current ) {
+                this._core._plugins.current.switchTo(index);
+            }
+        }
+    };
+
+    /**
+     * Destroys the plugin.
+     * @protected
+     */
+    Linked.prototype.destroy = function() {
+        var handler, property;
+
+        for (handler in this._handlers) {
+            this.$element.off(handler, this._handlers[handler]);
+        }
+        for (property in Object.getOwnPropertyNames(this)) {
+            typeof this[property] != 'function' && (this[property] = null);
+        }
+    };
+
+    $.fn.owlCarousel.Constructor.Plugins.linked = Linked;
+
+})(window.Zepto || window.jQuery, window, document);
+
+
+$(".parent").owlCarousel({
+    nav: false,
+    items: 1,
+    // margin:10,
+    mouseDrag:false,
+    touchDrag:false,
+    autoHeight:true,
+    linked: ".child"
+});
+var syncToFirst = $(".child");
+$(syncToFirst).owlCarousel({
+    nav: false,
+    items: 1,
+    // margin:10,
+    mouseDrag:false,
+    touchDrag:false,
+    autoHeight:true,
+    dots:false,
+    linked: syncToFirst.prev()
+}).on('initialized.owl.carousel linked.to.owl.carousel', function() {
+    syncToFirst.find('.owl-item.current').removeClass('current');
+    var current = syncToFirst.find('.owl-item.active.center').length ? syncToFirst.find('.owl-item.active.center') : syncToFirst.find('.owl-item.active').eq(0);
+    current.addClass('current');
+});
+
+
+</script>
+{% schema %}
+{
+  "name": "Dynamic-grid-carousel",
+  "settings": [],
+  "blocks":[
+  {
+    "type": "Featured-image",
+    "name": "Full background image",
+    "settings": [
+    {
+			"type": "image_picker",
+			"id": "larger-section-bg",
+			"label": "Larger image section background"
+		},
+    {
+      "type": "select",
+      "id": "bg_image_position",
+      "label": "Image position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default":   "center"
+    },
+    {
+      "type": "image_picker",
+      "id": "smaller-section-bg",
+      "label": "Smaller image section background"
+    },
+    {
+      "type": "select",
+      "id": "bg_small_image_position",
+      "label": "Image position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default":   "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_link_text",
+      "label": "Enable Learn more link"
+    },
+    {
+     "id": "learn-more-title",
+     "type": "text",
+     "label": "Link title",
+     "default": "Learn More"
+    },
+    {
+     "id": "learn-more-url",
+     "type": "text",
+     "label": "Link url",
+     "default": "https://www.creategoodsinks.com/"
+    },
+    {
+      "type": "color",
+      "id": "block-color-bg",
+      "label": "Block color background",
+      "default": "#D48166"
+    },
+    {
+      "type": "color",
+      "id": "block-text-color",
+      "label": "Block text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "block-link-color",
+      "label": "Block link color",
+      "default": "#ffffff"
+    },
+    {
+     "id": "grid-text-content",
+     "type": "textarea",
+     "label": "Text content"
+    }
+    ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Dynamic-grid-carousel",
+      "category": "Images"
+    }
+  ]
+}
+{% endschema %}

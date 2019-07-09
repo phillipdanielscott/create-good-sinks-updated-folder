@@ -1,0 +1,42 @@
+<div class="vertical-menu">
+  {% for link in linklists[vertical-menu].links %}
+
+  <script type="text/javascript">
+    console.log("{{ link.title }}")
+  </script>
+
+{% unless link.title contains "Products" %}
+
+{% if linklists[link.handle] == empty %}
+  <li><a href="{{ link.url }}" class="top_link" data-dropdown-rel="{{ link.handle }}">{{ link.title }}</a></li>
+{% else %}
+  <!-- <li class="sublink dropdown_link--vertical"><a data-no-instant href="{{ link.url }}" class="{% if link.active %}active{% endif %} " data-dropdown-rel="{{ link.handle }}">{{ link.title }} <span class="icon-down-arrow"></span></a> -->
+  <li class="sublink dropdown_link--vertical"><a href="{{ link.url }}" class="{% if link.active %}active{% endif %} {% if linklists[link.handle] != empty %}dropdown_link{% else %} top_link {% endif %}" data-dropdown-rel="{{ link.handle }}">{{ link.title }} <span class="cgc-down-arrow"><i class="fas fa-sort-down"></i></span></a>
+    <ul class="vertical-menu_submenu">
+      {% for link in linklists[link.handle].links %}
+        {% if linklists[link.handle] == empty %}
+          <li><a href="{{ link.url }}">{{ link.title | remove_first: "-cgc" }}</a></li>
+        {% else %}
+        <li class="sublink"><a data-no-instant href="{{ link.url }}">{{ link.title }} <span class="right icon-down-arrow"></span></a>
+          <ul class="vertical-menu_sub-submenu">
+            {% for link in linklists[link.handle].links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </li>
+{% endif %}
+
+
+
+{% else %}
+
+<li><a href="{{ link.url }}" class="{% if link.active %}active{% endif %} {% if linklists[link.handle] != empty %}dropdown_link{% else %} top_link {% endif %}" data-dropdown-rel="{{ link.handle }}">{{ link.title }} {% if linklists[link.handle] != empty %}<span class="cgc-down-arrow"><i class="fas fa-sort-down"></i></span>{% endif %}</a></li>
+
+{% endunless %}
+
+  {% endfor %}
+</div>

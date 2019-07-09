@@ -1,0 +1,203 @@
+{% for link in linklists[sub-menu].links %}
+
+
+  {% if linklists[link.handle] != empty %}
+    {% assign link_count = linklists[link.handle].links | size %}
+    <div class="dropdown_container" data-dropdown="{{ link.handle }}">
+      <div class="dropdown menu">
+        <div class="dropdown_content {% if link_count < 4 %}dropdown_narrow{% endif %}">
+          {% for sublink in linklists[link.handle].links %}
+            <div class="dropdown_column cgc_dropdown_column">
+
+              {% if sublink.title == "Reviews"%}
+
+              <ul class="{% if linklists[sublink.handle] != empty %}dropdown_title{% else %}dropdown_item{% endif %} non-image-link">
+
+                <li>
+                  <a href="{{ sublink.url }}" style="color:black !important;">{{ sublink.title }}</a>
+                </li>
+
+              {% elsif sublink.title == "FAQ-cgc" %}
+
+              <ul class="{% if linklists[sublink.handle] != empty %}dropdown_title{% else %}dropdown_item{% endif %} non-image-link">
+
+                <li>
+                  <a href="{{ sublink.url }}" style="color:black !important;">{{ sublink.title | remove_first: "-cgc" }}</a>
+                </li>
+
+             {% elsif sublink.title == "Seamless Drain" %}
+
+              <ul class="{% if linklists[sublink.handle] != empty %}dropdown_title{% else %}dropdown_item{% endif %} non-image-link">
+
+              <li>
+                <a href="{{ sublink.url }}" style="color:black !important;">{{ sublink.title | remove_first: "-cgc" }}</a>
+              </li>
+
+              {% elsif sublink.title == "Offset Drain" %}
+
+              <ul class="{% if linklists[sublink.handle] != empty %}dropdown_title{% else %}dropdown_item{% endif %} non-image-link">
+
+              <li>
+                <a href="{{ sublink.url }}" style="color:black !important;">{{ sublink.title | remove_first: "-cgc" }}</a>
+              </li>
+
+              {% elsif sublink.title == "Ledge" %}
+
+              <ul class="{% if linklists[sublink.handle] != empty %}dropdown_title{% else %}dropdown_item{% endif %} non-image-link">
+
+                <li>
+                  <a href="{{ sublink.url }}" style="color:black !important;">{{ sublink.title | remove_first: "-cgc" }}</a>
+                </li>
+
+              {% elsif sublink.title == "Half inch radius" %}
+
+              <ul class="{% if linklists[sublink.handle] != empty %}dropdown_title{% else %}dropdown_item{% endif %} non-image-link">
+
+                <li>
+                  <a href="{{ sublink.url }}" style="color:black !important;">{{ sublink.title | remove_first: "-cgc" }}</a>
+                </li>
+
+              {% elsif sublink.title == "shipping time" %}
+
+              <ul class="{% if linklists[sublink.handle] != empty %}dropdown_title{% else %}dropdown_item{% endif %} non-image-link">
+
+                <li>
+                  <a href="{{ sublink.url }}" style="color:black !important;">{{ sublink.title | remove_first: "-cgc" }}</a>
+                </li>
+
+                {% elsif sublink.title == "Return Policy" %}
+
+                <ul class="{% if linklists[sublink.handle] != empty %}dropdown_title{% else %}dropdown_item{% endif %} non-image-link">
+
+                  <li>
+                    <a href="{{ sublink.url }}" style="color:black !important;">{{ sublink.title | remove_first: "-cgc" }}</a>
+                  </li>
+
+              {% elsif sublink.title == "Installation" %}
+
+              <ul class="{% if linklists[sublink.handle] != empty %}dropdown_title{% else %}dropdown_item{% endif %} non-image-link">
+
+                <li>
+                  <a href="{{ sublink.url }}" style="color:black !important;">{{ sublink.title | remove_first: "-cgc" }}</a>
+                </li>
+
+                {% elsif sublink.title == "Sink care" %}
+
+                <ul class="{% if linklists[sublink.handle] != empty %}dropdown_title{% else %}dropdown_item{% endif %} non-image-link">
+
+                  <li>
+                    <a href="{{ sublink.url }}" style="color:black !important;">{{ sublink.title | remove_first: "-cgc" }}</a>
+                  </li>
+
+                  {% elsif sublink.title == "Warranty" %}
+
+                  <ul class="{% if linklists[sublink.handle] != empty %}dropdown_title{% else %}dropdown_item{% endif %} non-image-link">
+
+                    <li>
+                      <a href="{{ sublink.url }}" style="color:black !important;">{{ sublink.title | remove_first: "-cgc" }}</a>
+                    </li>
+
+
+
+              {% else %}
+
+              <ul class="{% if linklists[sublink.handle] != empty %}dropdown_title{% else %}dropdown_item{% endif %} product-image-tab" style="background:
+                 linear-gradient(
+                   rgba(0, 0, 0, 0.6),
+                   rgba(0, 0, 0, 0.6)
+                 ),
+                 url({{ sublink.object.image | img_url: 'large' }});
+                 background-size: 100%;
+                 background-position: center;
+                 background-repeat: no-repeat;">
+
+                    <li class="product-image-link">
+                      <a href="{{ sublink.url }}">{{ sublink.title }}</a>
+                    </li>
+
+                  {% endif %}
+
+
+              </ul>
+
+              {% if linklists[sublink.handle] != empty %}
+                <ul>
+                  {% for subsublink in linklists[sublink.handle].links %}
+                    <li>
+                      <a href="{{ subsublink.url }}" class="testing-link">{{ subsublink.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+            {% cycle link.handle: '', '', '', '', '<div class="dropdown_row"></div>' %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endfor %}
+
+
+<!-- {% for link in linklists[sub-menu].links %}
+  {% if linklists[link.handle] != empty %}
+    {% assign link_count = linklists[link.handle].links | size %}
+    <div class="dropdown_container" data-dropdown="{{ link.handle }}">
+      <div class="dropdown menu cgc-dropdown">
+        <div class="dropdown_content {% if link_count < 4 %}dropdown_narrow{% endif %} container full-width">
+
+          <div class="container full-width dropdown-wrapper">
+
+              <div class="bottom-menu-wrapper">
+
+          {% for sublink in linklists[link.handle].links %}
+
+            {% if sublink.title == "Reviews"%}
+
+            <div class="dropdown_column five columns cgc_dropdown_column">
+
+                <a href="{{ sublink.url }}" style="color:black;">{{ sublink.title }}</a>
+
+             </div>
+
+             {% elsif sublink.title == "FAQ-cgc" %}
+
+             <div class="dropdown_column five columns cgc_dropdown_column">
+
+                 <a href="{{ sublink.url }}" style="color:black;">{{ sublink.title }}</a>
+
+              </div>
+
+            {% else %}
+
+            <div class="dropdown_column menu-item-box one-thirds-cgc" style="background:
+               linear-gradient(
+                 rgba(0, 0, 0, 0.6),
+                 rgba(0, 0, 0, 0.6)
+               ),
+               url({{ sublink.object.image | img_url: 'large' }});
+               background-size: 100%;
+               background-position: center;
+               background-repeat: no-repeat;">
+               <div id="overlay"></div>
+               <div class="submenu-text-content">
+
+                <a href="{{ sublink.url }}">{{ sublink.title }}</a> -->
+                <!-- <p>Explore</p>
+                <div class="explore-container"><div class="explore-line"></div></div> -->
+               <!-- </div>
+             </div>
+
+            {% endif %}
+
+
+
+            {% cycle link.handle: '', '', '', '', '<div class="dropdown_row"></div>' %}
+          {% endfor %}
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endfor %} -->

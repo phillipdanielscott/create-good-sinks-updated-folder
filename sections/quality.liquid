@@ -1,0 +1,72 @@
+<div class="quality-container container">
+  <h1>{{ page.title }}</h1>
+
+
+
+    {{ page.content }}
+
+
+
+  {% for block in section.blocks %}
+
+      {% case block.type %}
+
+
+        {% when 'featured-text'%}
+
+        <div class="quality-text-container">
+          <h3>{{ block.settings.featured-text-title }}</h3>
+          <div class="featured-text-container">
+            {{ block.settings.featured-text-description }}
+          </div>
+          <span><a href="{{ block.settings.link-url }}">Learn more</a></span><i class="fas fa-caret-right"></i>
+        </div>
+
+      {% endcase %}
+
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Ledge page content",
+  "settings": [
+
+  ],
+  "blocks": [
+  {
+    "type": "featured-text",
+    "name": "Featured text",
+    "settings": [
+
+    {
+     "type": "text",
+     "id": "featured-text-title",
+     "default": "TITLE",
+     "label": "Section Title"
+   },
+   {
+     "type": "richtext",
+     "id": "featured-text-description",
+     "label": "section Description",
+     "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>"
+   },
+   {
+    "type": "text",
+    "id": "link-url",
+    "default": "https://www.creategoodsinks.com/",
+    "label": "Section Title"
+   }
+
+    ]
+  }
+
+  ],
+  "presets": [
+    {
+      "name": "FAQ image slider",
+      "category": "images"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,341 @@
+{% comment %}
+** Footer - default view **
+- Static section
+- Uses blocks
+{% endcomment %}
+
+
+{% assign favorite_food = 'apples' %}
+
+<footer class="footer" style="background-color:{{ section.settings.footer_bg_color }}; ">
+  <div class="container footer-menu-wrap">
+      {% for block in section.blocks %}
+
+
+      <div class="{% if forloop.length >= 5 %}three columns{% elsif forloop.length == 4 %}four columns{% elsif forloop.length == 3 %}one-third column{% elsif forloop.length == 2 %}eight columns{% endif %} cgc-footer-item-wrapper-{{ block.settings.class-input }}" {{ block.shopify_attributes }}>
+
+
+          {% if block.type == 'link_list' %}
+
+            {% if linklists[block.settings.menu].handle == "cgc-footer-nav-1" %}
+
+            <div class="footer_menu footer-menu-1">
+
+            {% elsif linklists[block.settings.menu].handle == "cgc-footer-nav-2" %}
+
+            <div class="footer_menu footer-menu-2">
+
+            {% else %}
+
+            <div class="footer_menu">
+            {% endif %}
+
+
+            {% if block.settings.menu != blank %}
+              <!-- <h6>{{ linklists[block.settings.menu].title }}<span class="right icon-down-arrow"></span></h6> -->
+              {% if linklists[block.settings.menu].handle == "cgc-footer-nav-1" %}
+
+              <div class="toggle_content cgc-footer-menu-list-1">
+
+              {% elsif linklists[block.settings.menu].handle == "cgc-footer-nav-2" %}
+
+              <div class="toggle_content cgc-footer-menu-list-2">
+
+              {% else %}
+
+              <div class="toggle_content">
+              {% endif %}
+
+
+                <ul>
+                  {% for link in linklists[block.settings.menu].links %}
+                    <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% else %}
+              <h6>Menu title<span class="right icon-down-arrow"></span></h6>
+              <div class="toggle_content">
+                <ul>
+                  <li><p>{{ 'homepage.onboarding.no_content' | t }}</p></li>
+                </ul>
+              </div>
+            {% endif %}
+          </div>
+
+          {% elsif block.type == 'logo' %}
+
+            <div class="text-align--{{block.settings.text_align}}">
+              {% if block.settings.image %}
+                <img  src="{{ block.settings.image | img_url: '100x' }}"
+                      alt="{{ block.settings.image.alt | escape }}"
+                      class="footer-logo lazyload {{ settings.image_loading_style }}"
+                      data-sizes="25vw"
+                      style="max-width: {{- block.settings.image.width -}}px"
+                      data-src="{{ block.settings.image | img_url: '2048x' }}"
+                      data-srcset=" {{ block.settings.image | img_url: '200x' }} 200w,
+                                    {{ block.settings.image | img_url: '300x' }} 300w,
+                                    {{ block.settings.image | img_url: '400x' }} 400w,
+                                    {{ block.settings.image | img_url: '500x' }} 500w,
+                                    {{ block.settings.image | img_url: '600x' }} 600w,
+                                    {{ block.settings.image | img_url: '1000x' }} 1000w"
+                   />
+              {% else %}
+                <div class="logo">{{ shop.name }}</div>
+              {% endif %}
+              <p class="logo-text-content">{{ block.settings.logo-text-content }}</p>
+            </div>
+
+          {% elsif block.type == 'text' %}
+            <div class="footer_content">
+              {% if block.settings.title != blank %}
+                <!-- <h6>{{ block.settings.title }}<span class="right icon-down-arrow"></span></h6> -->
+                <div class="toggle_content footer-text-block">
+                  {{ block.settings.content }}
+                </div>
+              {% endif %}
+              <table style="width:80px;"cellpadding="0" cellspacing="0"><tr><td><a class="houzz-link-footer" href="https://www.houzz.com/pro/creategood/create-good-sinks" target="_blank"><img src="{{ block.settings.text-image-icon | img_url: '100x100' }}" alt="" ></a></td></tr></table>
+            </div>
+          {% elsif block.type == 'page' %}
+            <div class="footer_content">
+              {% if block.settings.page != blank %}
+                <h6>{{ pages[block.settings.page].title }}<span class="right icon-down-arrow"></span></h6>
+                <div class="toggle_content">
+                  {{ pages[block.settings.page].content }}
+                </div>
+              {% else %}
+                <h6>Page title<span class="right icon-down-arrow"></span></h6>
+                <div class="toggle_content">
+                  <p>{{ 'homepage.onboarding.no_content' | t }}</p>
+                </div>
+              {% endif %}
+            </div>
+
+          {% elsif block.type == 'html' %}
+            {% comment %}@TODO - Add HTML section for maps, widgets, embedding, etc{% endcomment %}
+
+          {% elsif block.type == 'empty' %}
+            <div class="empty-column"></div>
+
+          {% endif %}
+
+          {% assign social_media_column = section.settings.social_media_column | plus: 0  %}
+
+          {% if block.settings.social_icons_footer %}
+            {% assign social_icons = true %}
+            <div class="footer-social-icons">
+              {% include 'social-icons' %}
+            </div>
+          {% endif %}
+
+        </div>
+        {% if forloop.last and social_icons %}
+          <div class="footer-social-icons--mobile sixteen columns">
+            {% include 'social-icons' %}
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      <div class="sixteen columns row footer_credits">
+        <div class="credits">
+         <!-- Site Made by <a href="http://phillipcreates.com" target="_blank">{{ 'phillipcreates-logo.svg' | asset_url | img_tag }}</a> -->
+       </div>
+       <div class="patent">
+        US Patent 8214934 | CA Patent 2679883
+      </div>
+
+        {% if section.settings.display_payment_methods %}
+          <div class="payment_methods">
+            {% for type in shop.enabled_payment_types %}
+              <img src="{{ type | payment_type_img_url }}" alt="{{ type | replace: "_", " " | capitalize }}" />
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div><!--end footer_credits-->
+    </div>
+  </div>
+</footer>
+
+<style media="screen">
+  footer{
+    color: #1C1C1C !important;
+   }
+</style>
+
+{% schema %}
+
+{
+  "name": "Footer",
+  "class": "footer-section",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "color",
+      "id": "footer_bg_color",
+      "label": "Footer background color",
+      "default": "#E6E2DD"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_designed_by",
+      "label": "Show theme designer credits",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "display_payment_methods",
+      "label": "Show payment method icons",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo"
+        },
+        {
+          "type": "textarea",
+          "id": "logo-text-content",
+          "label": "Logo text content",
+          "default":"Text Content below logo"
+        },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "Logo alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "checkbox",
+          "id": "social_icons_footer",
+          "label": "Show social media footer icons",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "link_list",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "info": "This menu won't show dropdown items"
+        },
+        {
+          "type": "text",
+          "id": "class-input",
+          "label": "custom class (for development use)"
+        },
+        {
+          "type": "checkbox",
+          "id": "social_icons_footer",
+          "label": "Show social media footer icons",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "page",
+      "name": "Page",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "page",
+          "id": "page",
+          "label": "Content page"
+        },
+        {
+          "type": "checkbox",
+          "id": "social_icons_footer",
+          "label": "Show social media footer icons",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Text",
+          "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "text-image-icon",
+          "label": "Icon"
+        },
+        {
+          "type": "checkbox",
+          "id": "social_icons_footer",
+          "label": "Show social media footer icons",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "empty",
+      "name": "Empty column",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "social_icons_footer",
+          "label": "Show social media footer icons",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "logo"
+      },
+      {
+        "type": "link_list"
+      },
+      {
+        "type": "link_list"
+      },
+      {
+        "type": "text"
+      }
+    ]
+  }
+}
+
+{% endschema %}
