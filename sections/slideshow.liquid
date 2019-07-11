@@ -23,9 +23,25 @@
         data-slideshow-speed="{{section.settings.slideshow_speed}}"
         data-slideshow-text-animation="{{section.settings.slideshow_text_animation}}"
         >
+  
     {% for block in section.blocks %}
         <div class="gallery-cell slide-{{ forloop.index }}" {{ block.shopify_attributes }} data-block-id="{{block.id}}">
+
+        {% if block.settings.enable-badge-icon %}
+        <div class="slide-icon-container wow fadeInUp top-slide-houzz-icon" data-animation-in="fadeInUp">
+          <!-- <table style="width:70px;"cellpadding="0" cellspacing="0"><tr><td><a href="https://www.houzz.com/pro/creategood/create-good-sinks-kitchen-sinks-and-accessories"><img src="https://st.hzcdn.com/static/badge_8_8@2x.png" alt="Dan Sullivan in Cincinnati, OH on Houzz" width="70" height="70" border="0" /></a></td></tr></table>
+          <table style="width:70px;"cellpadding="0" cellspacing="0"><tr><td><a href="https://www.houzz.com/pro/creategood/create-good-sinks-kitchen-sinks-and-accessories"><img src="https://st.hzcdn.com/static/badge_13_8@2x.png" alt="Dan Sullivan in Cincinnati, OH on Houzz" width="70" height="70" border="0" /></a></td></tr></table>
+          <table style="width:70px;"cellpadding="0" cellspacing="0"><tr><td><a href="https://www.houzz.com/pro/creategood/create-good-sinks-kitchen-sinks-and-accessories"><img src="https://st.hzcdn.com/static/badge_44_8@2x.png" alt="Dan Sullivan in Cincinnati, OH on Houzz" width="70" height="70" border="0" /></a></td></tr></table> -->
+          <table style="width:70px;"cellpadding="0" cellspacing="0"><tr><td><a href="https://www.houzz.com/pro/creategood/create-good-sinks-kitchen-sinks-and-accessories"><img src="https://st.hzcdn.com/static/badge_47_8@2x.png" alt="Dan Sullivan in Cincinnati, OH on Houzz" width="70" height="70" border="0" /></a></td></tr></table>
+        </div>
+        {% endif %}
         {% if block.settings.image != nil %}
+        <div class="testing-overlay {{ block.settings.overlay-value }}" style="
+        width: -webkit-fill-available;
+        height: -webkit-fill-available;
+        position: absolute;">
+
+        </div>
           <img  src="{{ block.settings.image | img_url: '100x', format: 'pjpg' }}"
                 alt="{{ block.settings.image.alt | escape }}"
                 class="lazyload {{ settings.image_loading_style }}"
@@ -33,16 +49,16 @@
                 data-src="{{ block.settings.image | img_url: default, format: 'pjpg' }}"
                 srcset="
                 {{ block.settings.image | img_url: default, format: 'pjpg' }} {{default | replace: 'x', 'w'}},
-                {{ block.settings.image | img_url: size1, format: 'pjpg' }} {{size1 | replace: 'x', 'w'}},
-                {{ block.settings.image | img_url: size2, format: 'pjpg' }} {{size2 | replace: 'x', 'w'}},
-                {{ block.settings.image | img_url: size3, format: 'pjpg' }} {{size3 | replace: 'x', 'w'}},
-                {{ block.settings.image | img_url: size4, format: 'pjpg' }} {{size4 | replace: 'x', 'w'}},
-                {{ block.settings.image | img_url: size5, format: 'pjpg' }} {{size5 | replace: 'x', 'w'}},
-                {{ block.settings.image | img_url: size6, format: 'pjpg' }} {{size6 | replace: 'x', 'w'}},
-                {{ block.settings.image | img_url: size7, format: 'pjpg' }} {{size7 | replace: 'x', 'w'}},
-                {{ block.settings.image | img_url: size8, format: 'pjpg' }} {{size8 | replace: 'x', 'w'}},
-                {{ block.settings.image | img_url: size9, format: 'pjpg' }} {{size9 | replace: 'x', 'w'}},
-                {{ block.settings.image | img_url: size10, format: 'pjpg' }} {{size10 | replace: 'x', 'w'}}"
+                {{ block.settings.image | img_url: size1 }} {{size1 | replace: 'x', 'w'}},
+                {{ block.settings.image | img_url: size2 }} {{size2 | replace: 'x', 'w'}},
+                {{ block.settings.image | img_url: size3 }} {{size3 | replace: 'x', 'w'}},
+                {{ block.settings.image | img_url: size4 }} {{size4 | replace: 'x', 'w'}},
+                {{ block.settings.image | img_url: size5 }} {{size5 | replace: 'x', 'w'}},
+                {{ block.settings.image | img_url: size6 }} {{size6 | replace: 'x', 'w'}},
+                {{ block.settings.image | img_url: size7 }} {{size7 | replace: 'x', 'w'}},
+                {{ block.settings.image | img_url: size8 }} {{size8 | replace: 'x', 'w'}},
+                {{ block.settings.image | img_url: size9 }} {{size9 | replace: 'x', 'w'}},
+                {{ block.settings.image | img_url: size10 }} {{size10 | replace: 'x', 'w'}}"
                  />
         {% else %}
           {% capture i %}{% cycle "1", "2" %}{% endcapture %}
@@ -60,7 +76,7 @@
             {% endif %}
           {% endunless %}
           {% unless block.settings.pretext == blank and block.settings.title == blank and block.settings.subtitle == blank and block.settings.button1 == blank and block.settings.button2 == blank %}
-            <div class="caption position-{{block.settings.text_position}} js-caption">
+            <div class="caption position-{{block.settings.text_position}} js-caption slider-cgc-caption">
                 <div class="caption-content
                             caption-background-{{block.settings.caption_background}}
                             caption-transparency-{{ block.settings.caption_background_transparency }}
@@ -71,26 +87,35 @@
                     </div>
                   {% endif %}
                   {% if forloop.first == true and block.settings.title != blank %}
-                    <h1 class="headline">
+                    {% if block.settings.enable-border-outline %}
+                   <h1 class="headline cgc-slider-headline" style="font-weight: 700;
+                        font-family: Poppins;
+                        display: inline;
+                        border: 3px solid white;
+                        padding: 35px;
+                    }">
+                    {% else %}
+                   <h1 class="headline cgc-slider-headline">
+                    {% endif %}
                       {{ block.settings.title }}
                     </h1>
                   {% elsif block.settings.title != blank %}
-                    <p class="headline">
+                    <p class="headline cgc-slider-headline">
                       {{ block.settings.title }}
                     </p>
                   {% endif %}
                   {% if block.settings.subtitle != blank %}
-                    <div class="subtitle">
+                    <div class="subtitle cgc-slider-subtitle">
                       {{ block.settings.subtitle }}
                     </div>
                   {% endif %}
                   {% if block.settings.button1 != blank %}
-                    <a {% if block.settings.button1_link != blank %}href="{{ block.settings.button1_link }}"{% endif %} class="action_button first_button highlight-{{block.settings.button1_highlight}}">
+                    <a {% if block.settings.button1_link != blank %}href="{{ block.settings.button1_link }}"{% endif %} class="slider_action_button action_button first_button highlight-{{block.settings.button1_highlight}}">
                       {{ block.settings.button1 }}
                     </a>
                   {% endif %}
                   {% if block.settings.button2 != blank %}
-                    <a {% if block.settings.button2_link != blank %}href="{{ block.settings.button2_link }}"{% endif %} class="action_button second_button highlight-{{block.settings.button2_highlight}}">
+                    <a {% if block.settings.button2_link != blank %}href="{{ block.settings.button2_link }}"{% endif %} class="slider_action_button action_button second_button highlight-{{block.settings.button2_highlight}}">
                       {{ block.settings.button2 }}
                     </a>
                   {% endif %}
@@ -156,7 +181,7 @@
       "max": 12,
       "step": 1,
       "default": 6,
-      "unit": "sec"        
+      "unit": "sec"
     }
   ],
   "blocks": [
@@ -169,6 +194,42 @@
           "id": "image",
           "label": "Image",
           "info": "1600 x 1000px recommended"
+        },
+        {
+        "type": "select",
+        "id": "overlay-value",
+        "label": "background-opacity",
+        "info": "Used to darken image for legible text.",
+        "default": "image-overlay-35",
+        "options": [
+          { "value": "image-overlay-0", "label": "0%"},
+          { "value": "image-overlay-5", "label": "5%"},
+          { "value": "image-overlay-10", "label": "10%"},
+          { "value": "image-overlay-15", "label": "15%"},
+          { "value": "image-overlay-20", "label": "20%"},
+          { "value": "image-overlay-25", "label": "25%"},
+          { "value": "image-overlay-30", "label": "30%"},
+          { "value": "image-overlay-35", "label": "35%"},
+          { "value": "image-overlay-40", "label": "40%"},
+          { "value": "image-overlay-45", "label": "45%"},
+          { "value": "image-overlay-50", "label": "50%"},
+          { "value": "image-overlay-55", "label": "55%"},
+          { "value": "image-overlay-60", "label": "60%"},
+          { "value": "image-overlay-65", "label": "65%"},
+          { "value": "image-overlay-70", "label": "70%"},
+          { "value": "image-overlay-75", "label": "75%"},
+          { "value": "image-overlay-80", "label": "80%"},
+          { "value": "image-overlay-85", "label": "85%"},
+          { "value": "image-overlay-90", "label": "90%"},
+          { "value": "image-overlay-95", "label": "95%"},
+          { "value": "image-overlay-100", "label": "100%"}
+        ]
+        },
+        {
+          "type": "checkbox",
+          "id": "enable-badge-icon",
+          "default": false,
+          "label": "Enable houzz badge icons"
         },
         {
           "type": "richtext",
@@ -205,6 +266,12 @@
             }
           ],
           "default": "center"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable-border-outline",
+          "default": false,
+          "label": "Enable border (for center text only)"
         },
         {
           "type": "select",
